@@ -10,5 +10,6 @@ $rafflepress_default_settings = '{
     "updates":"none",
     "updates_to":"",
     "slug":"rafflepress",
+    "disable_rafflepress_notifications":false,
     "default_timezone":"' . $rafflepress_default_timezone . '"
  }';

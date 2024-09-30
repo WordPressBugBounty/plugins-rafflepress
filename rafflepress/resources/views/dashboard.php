@@ -16,7 +16,7 @@ $email = $current_user->user_email;
 $timezones = rafflepress_lite_get_timezones();
 
 // Pers
-$per = array();
+$per            = array();
 $active_license = false;
 
 $license_name = '';
@@ -25,7 +25,6 @@ $license_name = '';
 // Get notifications
 $notifications = new RafflePress_Notifications();
 $notifications = $notifications->get();
-
 ?>
 
 
@@ -192,7 +191,17 @@ if ( rafflepress_lite_cu() ) {
 }
 ?>
 
-
+<?php
+$rafflepress_app_settings = json_decode( $rafflepress_settings );
+if ( isset( $rafflepress_app_settings ) ) {
+	if ( isset( $rafflepress_app_settings->disable_rafflepress_notifications ) ) {
+		if ( $rafflepress_app_settings->disable_rafflepress_notifications === true ) {
+			$notifications = array();
+		}
+	}
+}
+?>
+ 
 
 // settings: {
 // 				button: false,

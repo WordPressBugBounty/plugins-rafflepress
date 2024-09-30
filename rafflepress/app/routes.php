@@ -95,6 +95,16 @@ function rafflepress_lite_create_menus() {
 	$n                   = new RafflePress_Notifications();
 	$notifications_count = $n->get_count();
 
+	$rafflepress_settings = get_option( 'rafflepress_settings' );
+	$rafflepress_app_settings = json_decode( $rafflepress_settings );
+	if ( isset( $rafflepress_app_settings ) ) {
+		if ( isset( $rafflepress_app_settings->disable_rafflepress_notifications ) ) {
+			if ( $rafflepress_app_settings->disable_rafflepress_notifications === true ) {
+				$notifications_count = 0;
+			}
+		}
+	}
+
 
 	if ( ! empty( $notifications_count ) ) {
 		$notification = '<span class="update-plugins"><span class="plugin-count">' . $notifications_count . '</span></span>';

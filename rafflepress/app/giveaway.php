@@ -909,6 +909,10 @@ function rafflepress_lite_save_giveaway() {
 				$settings_obj->page_background_color = rafflepress_lite_sanitize_hex_color( $settings_obj->page_background_color );
 			}
 
+			if ( ! empty( $settings_obj->gdpr_consent_text ) ) {
+				$settings_obj->gdpr_consent_text = wp_kses_post( $settings_obj->gdpr_consent_text );
+			}
+
 			$settings = wp_json_encode($settings_obj);
 		}
 

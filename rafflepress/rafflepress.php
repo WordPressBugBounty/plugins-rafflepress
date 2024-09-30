@@ -3,7 +3,7 @@
 Plugin Name: RafflePress Lite
 Plugin URI: https://www.rafflepress.com
 Description: RafflePress allows you to easily create giveaways, contests and rewards in WordPress
-Version:  1.12.16
+Version:  1.12.17
 Author: RafflePress
 Author URI: https://www.rafflepress.com
 TextDomain: rafflepress
@@ -16,7 +16,7 @@ License: GPLv2 or later
  */
 define( 'RAFFLEPRESS_BUILD', 'lite' );
 define( 'RAFFLEPRESS_SLUG', 'rafflepress/rafflepress.php' );
-define( 'RAFFLEPRESS_VERSION', '1.12.16' );
+define( 'RAFFLEPRESS_VERSION', '1.12.17' );
 define( 'RAFFLEPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 // Example output: /Applications/MAMP/htdocs/wordpress/wp-content/plugins/rafflepress/
 define( 'RAFFLEPRESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

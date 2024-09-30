@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: SeedProd <support@seedprod.com>\n"
 "Last-Translator: John Turner <john@seedprod.com>\n"
-"POT-Creation-Date: 2024-08-15 19:24+0000\n"
+"POT-Creation-Date: 2024-09-25 14:57+0000\n"
 "Report-Msgid-Bugs-To: https://seedprod.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -263,7 +263,7 @@ msgstr ""
 msgid "Draft - "
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:212, build/rafflepress/app/giveaway.php:1033, build/rafflepress/resources/emails/notification.php:126, build/rafflepress/resources/emails/notification.php:168, build/rafflepress/resources/views/backend-translations.php:100
+#: build/rafflepress/app/giveaway.php:212, build/rafflepress/app/giveaway.php:1037, build/rafflepress/resources/emails/notification.php:126, build/rafflepress/resources/emails/notification.php:168, build/rafflepress/resources/views/backend-translations.php:100
 msgid "Ended"
 msgstr ""
 
@@ -311,11 +311,11 @@ msgstr ""
 msgid "Sorry this url already exists. Please choose a new one."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:953, build/rafflepress/app/giveaway.php:968
+#: build/rafflepress/app/giveaway.php:957, build/rafflepress/app/giveaway.php:972
 msgid "Sorry the Page Permalink you assigned already exists. Please Choose a New Page Permalink under Settings > General"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:1031
+#: build/rafflepress/app/giveaway.php:1035
 msgid "Starts in"
 msgstr ""
 
@@ -423,35 +423,35 @@ msgstr ""
 msgid "I already did"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:115, build/rafflepress/app/routes.php:116
+#: build/rafflepress/app/routes.php:125, build/rafflepress/app/routes.php:126
 msgid "Giveaways"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:124, build/rafflepress/app/routes.php:125, build/rafflepress/resources/views/backend-translations.php:91
+#: build/rafflepress/app/routes.php:134, build/rafflepress/app/routes.php:135, build/rafflepress/resources/views/backend-translations.php:91
 msgid "Add New"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:133, build/rafflepress/app/routes.php:134, build/rafflepress/resources/views/backend-translations.php:427
+#: build/rafflepress/app/routes.php:143, build/rafflepress/app/routes.php:144, build/rafflepress/resources/views/backend-translations.php:427
 msgid "Settings"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:142, build/rafflepress/app/routes.php:143, build/rafflepress/resources/views/backend-translations.php:4
+#: build/rafflepress/app/routes.php:152, build/rafflepress/app/routes.php:153, build/rafflepress/resources/views/backend-translations.php:4
 msgid "About Us"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:152, build/rafflepress/app/routes.php:153
+#: build/rafflepress/app/routes.php:162, build/rafflepress/app/routes.php:163
 msgid "Get Pro"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:168, build/rafflepress/app/routes.php:169
+#: build/rafflepress/app/routes.php:178, build/rafflepress/app/routes.php:179
 msgid "Builder"
 msgstr ""
 
-#: build/rafflepress/app/settings.php:26
+#: build/rafflepress/app/settings.php:33
 msgid "Error Updating Settings"
 msgstr ""
 
-#: build/rafflepress/app/settings.php:21
+#: build/rafflepress/app/settings.php:28
 msgid "Settings Updated"
 msgstr ""
 
@@ -2601,6 +2601,10 @@ msgstr ""
 msgid "Note: Users can bypass the IP check by modifying other headers besides REMOTE_ADDR. We recommend \"Only Allow Remote Address header for checking IP\" unless you are behind a proxy like CloudFlare. If you are behind a proxy then all IPs may appear the same."
 msgstr ""
 
+#: build/rafflepress/resources/views/backend-translations.php:803
+msgid "Disable RafflePress Notifications"
+msgstr ""
+
 #: build/rafflepress/resources/views/builder.php:96
 msgid "Please click the link below to confirm your email address."
 msgstr ""
@@ -2939,6 +2943,18 @@ msgstr ""
 
 #: build/rafflepress/resources/views/frontend-translations.php:141
 msgid "Enter Trustpilot Review URL"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:142
+msgid "Please enter a valid Trustpilot Review url."
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:143
+msgid "Please enter a valid Capterra Review url."
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:144
+msgid "Please enter a valid G2 Review url."
 msgstr ""
 
 #: build/rafflepress/resources/views/rafflepress-giveaway.php:66

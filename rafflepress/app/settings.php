@@ -14,6 +14,13 @@ function rafflepress_lite_save_settings() {
 				rafflepress_lite_add_custom_slug( $settings['slug'] );
 			}
 
+			// Edit Notification
+			if ( isset( $settings['disable_rafflepress_notifications'] ) && 'true' === $settings['disable_rafflepress_notifications'] ) {
+				$settings['disable_rafflepress_notifications'] = true;
+			} else {
+				$settings['disable_rafflepress_notifications'] = false;
+			}
+
 			update_option( 'rafflepress_settings', wp_json_encode( $settings ) );
 
 			$response = array(

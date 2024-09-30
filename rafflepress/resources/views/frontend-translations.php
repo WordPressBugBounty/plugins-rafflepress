@@ -139,5 +139,8 @@
 		'txt_117'  => __( 'Enter G2 Review URL', 'rafflepress' ),
 		'txt_118'  => __( 'Enter Capterra Review URL', 'rafflepress' ),
 		'txt_119'  => __( 'Enter Trustpilot Review URL', 'rafflepress' ),
+		'txt_120'  => __( 'Please enter a valid Trustpilot Review url.', 'rafflepress' ),
+		'txt_121'  => __( 'Please enter a valid Capterra Review url.', 'rafflepress' ),
+		'txt_122'  => __( 'Please enter a valid G2 Review url.', 'rafflepress' ),
 	);
 
