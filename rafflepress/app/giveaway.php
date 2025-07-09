@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /*
  * Get Giveaway Lists
  */
@@ -23,6 +28,24 @@ function rafflepress_lite_get_giveaway_list() {
  */
 function rafflepress_lite_new_giveaway() {
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_builder' && isset( $_GET['id'] ) && $_GET['id'] == '0' ) {
+		// Verify nonce for CSRF protection
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_nonce' ) ) {
+			wp_die(
+				__( 'Security check failed. Please try again.', 'rafflepress' ), 
+				__( 'Security Error', 'rafflepress' ), 
+				array( 'response' => 403 )
+			);
+		}
+
+		// Check user capabilities
+		if ( ! current_user_can( apply_filters( 'rafflepress_create_giveaway_capability', 'edit_others_posts' ) ) ) {
+			wp_die(
+				__( 'You do not have sufficient permissions to create giveaways.', 'rafflepress' ),
+				__( 'Insufficient Permissions', 'rafflepress' ), 
+				array( 'response' => 403 ) 
+			);
+		}
+
 		global $wpdb;
 		$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 
@@ -67,14 +90,14 @@ function rafflepress_lite_new_giveaway() {
 			)
 		);
 
-		 $id = $wpdb->insert_id;
+		$id = $wpdb->insert_id;
 		if ( is_numeric( $id ) ) {
 			$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' ) . " (ID #$id)";
 		} else {
 			$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' );
 		}
 
-		 // Update name
+		// Update name
 		$wpdb->update(
 			$tablename,
 			array(
@@ -87,8 +110,18 @@ function rafflepress_lite_new_giveaway() {
 			array( '%d' )
 		);
 
-		 wp_redirect( 'admin.php?page=rafflepress_lite_builder&id=' . $id . '#/template/' . $id );
-		 exit();
+		// Secure URL building
+		wp_redirect( 
+			add_query_arg( 
+				array(
+					'page' => 'rafflepress_lite_builder',
+					'_wpnonce' => $_GET['_wpnonce'],
+					'id'   => $id
+				),
+				admin_url( 'admin.php' )
+			) . '#/template/' . $id 
+		);
+		exit();
 	}
 }
 

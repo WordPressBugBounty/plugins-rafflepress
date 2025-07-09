@@ -98,8 +98,8 @@ function rafflepress_lite_admin_enqueue_scripts( $hook_suffix ) {
 }
 add_action( 'admin_enqueue_scripts', 'rafflepress_lite_admin_enqueue_scripts' );
 
-add_filter( 'learn-press/admin-default-scripts', 'modify_admin_default_scripts' );
-function modify_admin_default_scripts( $scripts ) {
+add_filter( 'learn-press/admin-default-scripts', 'rafflepress_lite_modify_admin_default_scripts' );
+function rafflepress_lite_modify_admin_default_scripts( $scripts ) {
 	if ( is_admin() ) {
 		$screen = get_current_screen();
 		if ( $screen && false !== strpos( $screen->id, 'rafflepress_lite' ) ) {

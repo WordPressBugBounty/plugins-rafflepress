@@ -31,6 +31,9 @@ $notifications = $notifications->get();
 <div id="rafflepress-vue-app"></div>
 <script>
 
+<?php $rafflepress_nonce = wp_create_nonce( 'rafflepress_nonce' ); ?>
+var rafflepress_nonce = <?php echo wp_json_encode( $rafflepress_nonce ); ?>;
+
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_run_one_click_upgrade', 'rafflepress_lite_run_one_click_upgrade' ) ); ?>
 var rafflepress_run_one_click_upgrade_url = "<?php echo $ajax_url; ?>";
 
@@ -237,6 +240,7 @@ var rafflepress_data_admin =
 			'settings'                  => json_decode( $rafflepress_settings ),
 			'dismiss_settings_lite_cta' => get_option( 'rafflepress_dismiss_settings_lite_cta' ),
 			'inline_help_articles'      => rafflepress_lite_fetch_inline_help_data(),
+			'rafflepress_nonce'         => $rafflepress_nonce,
 		)
 	);
 	?>

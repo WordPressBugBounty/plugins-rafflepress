@@ -1,4 +1,4 @@
-# Copyright (C) 2024 RafflePress
+# Copyright (C) 2025 RafflePress
 # This file is distributed under the same license as the RafflePress package.
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: SeedProd <support@seedprod.com>\n"
 "Last-Translator: John Turner <john@seedprod.com>\n"
-"POT-Creation-Date: 2024-09-25 14:57+0000\n"
+"POT-Creation-Date: 2025-07-01 15:37+0000\n"
 "Report-Msgid-Bugs-To: https://seedprod.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -255,67 +255,83 @@ msgstr ""
 msgid "Live Preview"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:74, build/rafflepress/app/giveaway.php:72
+#: build/rafflepress/app/giveaway.php:34
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:35
+msgid "Security Error"
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:43
+msgid "You do not have sufficient permissions to create giveaways."
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:44
+msgid "Insufficient Permissions"
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:97, build/rafflepress/app/giveaway.php:95
 msgid "New Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:203
+#: build/rafflepress/app/giveaway.php:236
 msgid "Draft - "
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:212, build/rafflepress/app/giveaway.php:1037, build/rafflepress/resources/emails/notification.php:126, build/rafflepress/resources/emails/notification.php:168, build/rafflepress/resources/views/backend-translations.php:100
+#: build/rafflepress/app/giveaway.php:245, build/rafflepress/app/giveaway.php:1070, build/rafflepress/resources/emails/notification.php:126, build/rafflepress/resources/emails/notification.php:168, build/rafflepress/resources/views/backend-translations.php:100
 msgid "Ended"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:209
+#: build/rafflepress/app/giveaway.php:242
 msgid "Running - Ends in"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:207
+#: build/rafflepress/app/giveaway.php:240
 msgid "Scheduled - Starts in"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:231
+#: build/rafflepress/app/giveaway.php:264
 msgid "Disabled"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:254
+#: build/rafflepress/app/giveaway.php:287
 msgid "Pre Launch Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:252
+#: build/rafflepress/app/giveaway.php:285
 msgid "Milestone Rewards Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:250
+#: build/rafflepress/app/giveaway.php:283
 msgid "Rewards Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:248
+#: build/rafflepress/app/giveaway.php:281
 msgid "Leaderboard Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:246, build/rafflepress/resources/views/backend-translations.php:538
+#: build/rafflepress/app/giveaway.php:279, build/rafflepress/resources/views/backend-translations.php:538
 msgid "Classic Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:260, build/rafflepress/app/giveaway.php:266
+#: build/rafflepress/app/giveaway.php:293, build/rafflepress/app/giveaway.php:299
 msgid "N/A"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:476
+#: build/rafflepress/app/giveaway.php:509
 msgid "Copy"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:757, build/rafflepress/app/giveaway.php:772
+#: build/rafflepress/app/giveaway.php:790, build/rafflepress/app/giveaway.php:805
 msgid "Sorry this url already exists. Please choose a new one."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:957, build/rafflepress/app/giveaway.php:972
+#: build/rafflepress/app/giveaway.php:990, build/rafflepress/app/giveaway.php:1005
 msgid "Sorry the Page Permalink you assigned already exists. Please Choose a New Page Permalink under Settings > General"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:1035
+#: build/rafflepress/app/giveaway.php:1068
 msgid "Starts in"
 msgstr ""
 

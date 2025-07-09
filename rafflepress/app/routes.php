@@ -246,7 +246,7 @@ function rafflepress_lite_redirect_to_site() {
 	}
 	// add new page
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_add_new' ) {
-		wp_redirect( 'admin.php?page=rafflepress_lite_builder&id=0#/template' );
+		wp_redirect( 'admin.php?page=rafflepress_lite_builder&_wpnonce=' . wp_create_nonce( 'rafflepress_nonce' ) . '&id=0#/template' );
 		exit();
 	}
 
