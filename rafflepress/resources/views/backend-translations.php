@@ -801,4 +801,6 @@ $rp_backend_translations = array(
 	'txt_777' => __( 'Only Allow REMOTE_ADDR header for checking IP.', 'rafflepress' ),
 	'txt_778' => __( 'Note: Users can bypass the IP check by modifying other headers besides REMOTE_ADDR. We recommend "Only Allow Remote Address header for checking IP" unless you are behind a proxy like CloudFlare. If you are behind a proxy then all IPs may appear the same.', 'rafflepress' ),
 	'txt_779' => __( 'Disable RafflePress Notifications', 'rafflepress' ),
+	'txt_780' => __( 'Follow us on WhatsApp', 'rafflepress' ),
+	'txt_781' => __( 'WhatsApp Channel URL', 'rafflepress' ),
 );

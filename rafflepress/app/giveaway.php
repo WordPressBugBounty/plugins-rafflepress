@@ -23,104 +23,147 @@ function rafflepress_lite_get_giveaway_list() {
 	}
 }
 
+
+
 /*
- * New Giveaway
+ * Secure Giveaway Creation Handler (AJAX/POST-based)
  */
-function rafflepress_lite_new_giveaway() {
-	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_builder' && isset( $_GET['id'] ) && $_GET['id'] == '0' ) {
-		// Verify nonce for CSRF protection
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_nonce' ) ) {
-			wp_die(
+function rafflepress_lite_create_giveaway_handler() {
+	// Handle both AJAX and regular POST requests
+	$is_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+	
+	// Verify nonce with action-specific context
+	$nonce_valid = false;
+	if ( isset( $_POST['_rafflepress_nonce'] ) ) {
+		$nonce_valid = wp_verify_nonce( $_POST['_rafflepress_nonce'], 'rafflepress_create_giveaway' );
+	}
+	
+	if ( ! $nonce_valid ) {
+		if ( $is_ajax ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed. Please try again.', 'rafflepress' ) ) );
+		} else {
+			wp_die( 
 				__( 'Security check failed. Please try again.', 'rafflepress' ), 
 				__( 'Security Error', 'rafflepress' ), 
 				array( 'response' => 403 )
 			);
 		}
+	}
 
-		// Check user capabilities
-		if ( ! current_user_can( apply_filters( 'rafflepress_create_giveaway_capability', 'edit_others_posts' ) ) ) {
-			wp_die(
-				__( 'You do not have sufficient permissions to create giveaways.', 'rafflepress' ),
-				__( 'Insufficient Permissions', 'rafflepress' ), 
-				array( 'response' => 403 ) 
-			);
-		}
-
-		global $wpdb;
-		$tablename = $wpdb->prefix . 'rafflepress_giveaways';
-
-		// get app settings
-		$timezone = 'UTC';
-
-
-		$id = absint( $_GET['id'] );
-		//2019-05-28T04:00:00.000Z Y-m-d
-		$starts = date( 'c', strtotime( ' + 2 days' ) );
-		$ends   = date( 'c', strtotime( ' + 16 days' ) );
-		// $starts = null;
-		// $ends = null;
-
-		require_once RAFFLEPRESS_PLUGIN_PATH . 'resources/giveaway-templates/basic-giveaway.php';
-		$settings           = json_decode( $rafflepress_basic_giveaway );
-		$settings->starts   = $starts;
-		$settings->ends     = $ends;
-		$settings->timezone = $timezone;
-		$settings->is_new   = true;
-		$settings           = wp_json_encode( $settings );
-
-		// Insert
-		$r = $wpdb->insert(
-			$tablename,
-			array(
-				'name'                => '',
-				'giveawaytemplate_id' => 'basic-giveaway',
-				'starts'              => null,
-				'ends'                => null,
-				'settings'            => $settings,
-				'uuid'                => wp_generate_uuid4(),
-
-			),
-			array(
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-			)
-		);
-
-		$id = $wpdb->insert_id;
-		if ( is_numeric( $id ) ) {
-			$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' ) . " (ID #$id)";
+	// Check user capabilities
+	if ( ! current_user_can( apply_filters( 'rafflepress_create_giveaway_capability', 'edit_others_posts' ) ) ) {
+		$error_message = __( 'You do not have sufficient permissions to create giveaways.', 'rafflepress' );
+		if ( $is_ajax ) {
+			wp_send_json_error( array( 'message' => $error_message ) );
 		} else {
-			$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' );
+			wp_die( $error_message, __( 'Insufficient Permissions', 'rafflepress' ), array( 'response' => 403 ) );
 		}
+	}
 
-		// Update name
-		$wpdb->update(
-			$tablename,
-			array(
-				'name' => $giveaway_name,
-			),
-			array( 'id' => $id ),
-			array(
-				'%s',
-			),
-			array( '%d' )
-		);
+	// Duplicate prevention mechanism
+	$user_id = get_current_user_id();
+	$recent_creation = get_user_meta( $user_id, '_rafflepress_creating_giveaway', true );
+	
+	if ( $recent_creation && ( time() - $recent_creation < 10 ) ) {
+		$error_message = __( 'Please wait before creating another giveaway.', 'rafflepress' );
+		if ( $is_ajax ) {
+			wp_send_json_error( array( 'message' => $error_message ) );
+		} else {
+			wp_die( $error_message );
+		}
+	}
+	
+	// Set creation timestamp
+	update_user_meta( $user_id, '_rafflepress_creating_giveaway', time() );
 
-		// Secure URL building
-		wp_redirect( 
-			add_query_arg( 
+	global $wpdb;
+	$tablename = $wpdb->prefix . 'rafflepress_giveaways';
+
+	// Get app settings
+	$timezone = 'UTC';
+
+	// Create giveaway data
+	$starts = date( 'c', strtotime( ' + 2 days' ) );
+	$ends   = date( 'c', strtotime( ' + 16 days' ) );
+
+	require_once RAFFLEPRESS_PLUGIN_PATH . 'resources/giveaway-templates/basic-giveaway.php';
+	$settings           = json_decode( $rafflepress_basic_giveaway );
+	$settings->starts   = $starts;
+	$settings->ends     = $ends;
+	$settings->timezone = $timezone;
+	// Note: Don't store is_new in database - it's a runtime property
+	$settings           = wp_json_encode( $settings );
+
+	// Database insert with error handling
+	$result = $wpdb->insert(
+		$tablename,
+		array(
+			'name'                => '',
+			'giveawaytemplate_id' => 'basic-giveaway',
+			'starts'              => null,
+			'ends'                => null,
+			'settings'            => $settings,
+			'uuid'                => wp_generate_uuid4(),
+		),
+		array( '%s', '%s', '%s', '%s', '%s', '%s' )
+	);
+
+	if ( $result === false ) {
+		delete_user_meta( $user_id, '_rafflepress_creating_giveaway' );
+		$error_message = __( 'Failed to create giveaway. Please try again.', 'rafflepress' );
+		if ( $is_ajax ) {
+			wp_send_json_error( array( 'message' => $error_message ) );
+		} else {
+			wp_die( $error_message );
+		}
+	}
+
+	$id = $wpdb->insert_id;
+	$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' ) . " (ID #$id)";
+
+	// Update name
+	$wpdb->update(
+		$tablename,
+		array( 'name' => $giveaway_name ),
+		array( 'id' => $id ),
+		array( '%s' ),
+		array( '%d' )
+	);
+
+	// Clear creation timestamp
+	delete_user_meta( $user_id, '_rafflepress_creating_giveaway' );
+
+	if ( $is_ajax ) {
+		// Get the complete settings for AJAX response
+		$settings_object = json_decode( $settings, true );
+		
+		// Return complete giveaway data for AJAX requests
+		wp_send_json_success( array(
+			'id' => $id,
+			'name' => $giveaway_name,
+			'giveawaytemplate_id' => 'basic-giveaway',
+			'settings' => $settings_object,
+			'redirect_url' => add_query_arg( 
 				array(
 					'page' => 'rafflepress_lite_builder',
-					'_wpnonce' => $_GET['_wpnonce'],
-					'id'   => $id
+					'_wpnonce' => wp_create_nonce( 'rafflepress_builder_' . $id ),
+					'id' => $id
 				),
 				admin_url( 'admin.php' )
-			) . '#/template/' . $id 
-		);
+			) . '#/template/' . $id
+		) );
+	} else {
+		// Secure redirect for regular POST requests
+		$redirect_url = add_query_arg( 
+			array(
+				'page' => 'rafflepress_lite_builder',
+				'_wpnonce' => wp_create_nonce( 'rafflepress_builder_' . $id ),
+				'id' => $id
+			),
+			admin_url( 'admin.php' )
+		) . '#/template/' . $id;
+		
+		wp_safe_redirect( $redirect_url );
 		exit();
 	}
 }

@@ -117,6 +117,11 @@ function rafflepress_lite_entry_options() {
 			'is_pro' => true,
 			'cat'    => 'subscribers',
 		),
+		'whatsapp-follow'     => array(
+			'name'   => __( 'Follow us on WhatsApp', 'rafflepress' ),
+			'is_pro' => true,
+			'cat'    => 'subscribers',
+		),
 		'tiktok-videos'       => array(
 			'name'   => __( 'View TikTok Post / Video', 'rafflepress' ),
 			'is_pro' => true,

@@ -38,7 +38,9 @@ if ( empty( $giveaway_id ) ) {
 		'name' => '',
 		'type' => '',
 	);
-	$settings = array();
+	$settings = array(
+		'is_new' => true
+	);
 } else {
 
 	// update giveaway
@@ -85,6 +87,8 @@ if ( empty( $giveaway_id ) ) {
 	} else {
 		$settings = json_decode( $giveaway->settings, true );
 		$settings = rafflepress_lite_array_add( $settings, 'entry_options', array() );
+		// Existing giveaways are not new
+		$settings['is_new'] = false;
 	}
 
 	$temp_start_countdown = strtotime( $giveaway->starts . ' UTC' );
@@ -188,6 +192,9 @@ var rafflepress_save_giveaway_url = "<?php echo $ajax_url; ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_save_slug', 'rafflepress_lite_save_slug' ) ); ?>
 var rafflepress_save_slug_url = "<?php echo $ajax_url; ?>";
+
+<?php $create_giveaway_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_create_giveaway', 'rafflepress_create_giveaway' ) ); ?>
+var rafflepress_create_giveaway_url = "<?php echo $create_giveaway_url; ?>";
 
 <?php $utc_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_get_utc_offset', 'rafflepress_lite_get_utc_offset' ) ); ?>
 var rafflepress_utc_url = "<?php echo $utc_url; ?>";

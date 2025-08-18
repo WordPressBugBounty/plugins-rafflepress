@@ -350,6 +350,9 @@ if ( ! empty( $settings->entry_options ) ) {
 		if ( $v->type == 'tiktok-follow' && empty( $v->tiktok_url ) ) {
 			$v->tiktok_url = 'http://www.tiktok.com/wpbeginner/';
 		}
+		if ( $v->type == 'whatsapp-follow' && empty( $v->whatsapp_url ) ) {
+			$v->whatsapp_url = 'https://www.whatsapp.com/channel/0029Vb6Dlwj9xVJeUowQ6x0t';
+		}
 		if ( $v->type == 'pinterest-follow' && empty( $v->pinterest_username ) ) {
 			$v->pinterest_username = 'https://www.pinterest.com/wpbeginner/';
 		}

@@ -774,6 +774,8 @@ body.rafflepress-body #wpwrap{background:#f1f1f1}
 .rafflepress-sidebar-form .icon-g2-follow{padding-left:8px !important}
 .rafflepress-sidebar-form .icon-g2-follow::before{margin-top:2px !important}
 .rafflepress .btn-tiktok-follow .icon-tiktok-follow,.rafflepress .btn-tiktok-videos .icon-tiktok-videos{padding-left:8px}
+.icon-whatsapp-follow::before{font-family:"Font Awesome 5 Brands";font-weight:400;content:"\f232"}
+.icon-whatsapp-follow{background-color:#25d366;border-color:#25d366 !important;color:#fff}
 .icon-instagram-follow::before,.icon-instagram-page-post::before{font-family:"Font Awesome 5 Brands";font-weight:400;content:"\f16d"}
 .icon-instagram-follow,.icon-instagram-page-post{background-color:#f55f3f;border-color:#f55f3f !important;color:#fff}
 .icon-pinterest-follow::before{font-family:"Font Awesome 5 Brands";font-weight:400;content:"\f0d2"}

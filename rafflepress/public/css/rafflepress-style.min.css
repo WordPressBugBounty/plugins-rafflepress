@@ -893,6 +893,8 @@ p{font-size:13px;line-height:1.5;margin:1em 0}
 .fa-capterra::before{background-image:url(../img/capterra-brands.svg);content:""}
 .fa-trustpilot::before{background-image:url(../img/trustpilot-brands.svg);content:""}
 .rafflepress-giveaway .btn-tiktok{background-color:#000 !important;border-color:#000 !important;color:#fff !important;font-family:"Helvetica Neue",Arial,sans-serif !important;font-weight:normal !important}
+.rafflepress-giveaway .btn-whatsapp{background-color:#25d366 !important;border-color:#25d366 !important;color:#fff !important;font-family:"Helvetica Neue",Arial,sans-serif !important;font-weight:normal !important}
+.rafflepress-giveaway .btn-whatsapp:hover{background-color:#128c7e !important;border-color:#128c7e !important}
 .rafflepress-giveaway .btn-pinterest{background:#e60023 !important;border-color:#e60023 !important;color:#fff !important;font-family:"Helvetica Neue",Arial,sans-serif !important}
 .rafflepress-giveaway .btn-linkedin{background:#2867b2 !important;border-color:#2867b2 !important;color:#fff !important;font-family:"Helvetica Neue",Arial,sans-serif !important}
 .fa-pinterest{color:#fff}
@@ -936,6 +938,8 @@ p{font-size:13px;line-height:1.5;margin:1em 0}
 .icon-fb-page-post{background-color:#4267b2;border-color:#4267b2 !important;color:#fff}
 .icon-twitch-follow::before{font-family:"Font Awesome 5 Brands";font-weight:400;content:"\f1e8"}
 .icon-twitch-follow{background-color:#9147ff;border-color:#9147ff !important;color:#fff}
+.icon-whatsapp-follow::before{font-family:"Font Awesome 5 Brands";font-weight:400;content:"\f232"}
+.icon-whatsapp-follow{background-color:#25d366;border-color:#25d366 !important;color:#fff}
 .icon-twitter-follow::before,.icon-tweet::before{width:17px;background-image:url(../img/x-twitter.svg);display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;content:'';background-size:16px auto;height:100%;background-repeat:no-repeat;margin-top:2px}
 .icon-twitter-follow,.icon-tweet{background-color:#fff;color:#fff}
 .fa-tweet::before{width:13px;background-image:url(../img/x-twitter-light.svg);display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;content:'';background-size:13px auto;height:12px;background-repeat:no-repeat}

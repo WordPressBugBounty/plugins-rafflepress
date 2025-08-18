@@ -142,5 +142,9 @@
 		'txt_120'  => __( 'Please enter a valid Trustpilot Review url.', 'rafflepress' ),
 		'txt_121'  => __( 'Please enter a valid Capterra Review url.', 'rafflepress' ),
 		'txt_122'  => __( 'Please enter a valid G2 Review url.', 'rafflepress' ),
+		'txt_123' => __( 'To get credit(s) for this entry, follow us on WhatsApp.', 'rafflepress' ),
+		'txt_124' => __( "What's your WhatsApp number?", 'rafflepress' ),
+		'txt_125' => __( 'Follow us on WhatsApp', 'rafflepress' ),
+		'txt_126' => __( 'Please Enter Your WhatsApp Phone number.', 'rafflepress' ),
 	);
 

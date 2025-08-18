@@ -3,7 +3,7 @@ Contributors: seedprod, smub
 Tags: giveaways, contests, sweepstakes, competition, loyalty, rewards, facebook, instagram, youtube, pinterest, twitter, giveaway, contest, social media, traffic, email list, website traffic, wordpress giveaway, lead generation, marketing, growth, poll, refer a friend, promotions, referral marketing, prize, engagement
 Requires at least: 4.8
 Tested up to: 6.8
-Stable tag: 1.12.17
+Stable tag: 1.12.19
 Requires PHP: 5.3.3
 License: GNU General Public License v2.0 or later
 
@@ -61,15 +61,15 @@ By using our easy to use drag and drop sweepstakes builder, you can easily add p
 
 While our WordPress giveaway plugin is very easy to use, we created smart goal based workflows to save you time.
 
-RafflePress comes with pre-built contest templates that are inspired by the best practices of the most successful campaigns in the history of internet.
+RafflePress comes with pre-built contest templates that are inspired by the best practices of the most successful campaigns in the history of the internet.
 
 The goal of our giveaway templates is to help you get huge results, FAST!
 
 = Verified Bonus Actions - Get More Followers and Real Engagement =
 
-RafflePress allows you to reward extra entries to users for competing bonus action items such as joining your facebook page, following you on Twitter, watching a video, and more.
+RafflePress allows you to reward extra entries to users for completing bonus action items such as joining your Facebook page, following you on Twitter, watching a video, and more.
 
-Unlike other WordPress giveaway plugins, we verify these actions using API where possible, so you can get higher quality social media followers with real engagement.
+Unlike other WordPress giveaway plugins, we verify these actions using APIs where possible, so you can get higher quality social media followers with real engagement.
 
 = Built-in Viral Sharing to Grow Your Website Traffic =
 
@@ -77,16 +77,16 @@ RafflePress get your visitors to bring you even more visitors.
 
 Simply put, you get more website traffic without buying any ads.
 
-Our built-in viral sharing feature reward users with bonus entries if they refer-a-friend or share your giveaway on social media using their custom referral link.
+Our built-in viral sharing feature rewards users with bonus entries if they refer-a-friend or share your giveaway on social media using their custom referral link.
 
-= Email Marketing Integrations to Help You Get More Subscribers = 
+= Email Marketing Integrations to Help You Get More Subscribers =
 
 RafflePress offers seamless integration with your favorite [email marketing services](https://www.wpbeginner.com/showcase/best-email-marketing-services/) like MailChimp, Constant Contact, AWeber, Drip, Active Campaign, and more.
 You can also use our Zapier integration to connect with thousands of other CRMs and marketing apps.
 
 = Mobile Ready, SEO Friendly and Optimized for Speed =
 
-RafflePress giveaway widget is 100% responsive and mobile-friendly by default. We also optimized every query on the front-end and the back-end to ensure maximum speed - Yes, RafflePress is one of the fastest WordPress contest plugin.
+RafflePress giveaway widget is 100% responsive and mobile-friendly by default. We also optimized every query on the front-end and the back-end to ensure maximum speed - Yes, RafflePress is one of the fastest WordPress contest plugins.
 
 You can embed your giveaway on any page with optimized title and description. With the speed and proper formatting, RafflePress is also one of the most SEO friendly giveaway plugin.
 
@@ -96,7 +96,7 @@ For higher conversions, the Pro version of RafflePress also offers dedicated giv
 
 RafflePress makes it easy for users to enter your giveaway by either providing their email address or through our social login feature which lets them login with Facebook.
 
-Our smart fraud detection feature helps you verify each action and user email, so you can invlidate fraud entries. 
+Our smart fraud detection feature helps you verify each action and user email, so you can invalidate fraud entries. 
 
 RafflePress makes it easy to pick winners for your giveaway campaigns using our random generator. If you're giving multiple prizes, then you can even pick multiple winners at once.
 
@@ -105,7 +105,7 @@ RafflePress makes it easy to pick winners for your giveaway campaigns using our 
 
 You can easily customize your giveaways with custom CSS.
 
-We also knew that our developer friends may want to extend contact forms further. That's why RafflePress come with tons of hooks and filters to create custom functionality.
+We also knew that our developer friends may want to extend contact forms further. That's why RafflePress comes with tons of hooks and filters to create custom functionality.
 
 = Full RafflePress Feature List =
 
@@ -119,7 +119,7 @@ We also knew that our developer friends may want to extend contact forms further
 * Giveaway Landing Page
 * Tracking and Reporting
 
-= Giveaway Actions = 
+= Giveaway Actions =
 
 RafflePress offers goal focused giveaway actions to help you get more subscribers, get more social engagement, and get more website traffic.
 
@@ -138,8 +138,8 @@ Get More Subscribers Actions:
 
 Get More Social Engagement Actions:
 
-* Refer a Friend (Viral) 
-* View Facebook Post / Video 
+* Refer a Friend (Viral)
+* View Facebook Post / Video
 * View Instagram Post / Video
 * View TikTok Post / Video
 * Watch a YouTube Video
@@ -148,7 +148,7 @@ Get More Social Engagement Actions:
 Get More Website Traffic Actions:
 
 * Tweet a Message
-* Share a Facebook
+* Share on Facebook
 * Visit a Page
 * Share on LinkedIn
 * Answer a Question
@@ -242,14 +242,14 @@ RafflePress drag & drop contest builder combined with our addons is the most pow
 
 * Facebook Contest to Grow Your Facebook Page
 * Facebook Giveaway to Get More Video Views and Likes
-* Instagram Giveway to Grow Your Instagram Followers
+* Instagram Giveaway to Grow Your Instagram Followers
 * Instagram Contest to Get More Video Views and Likes
 * TikTok Contest to Get More Video Views and Likes
 * Pinterest Contest and Sweepstakes to Grow Your Pinterest Following
 * Twitter Contest to Grow Your Twitter Followers
 * Twitter Giveaway to Get More Retweets
 * LinkedIn Contest to Get More LinkedIn Followers
-* LinkedIn Giveaway to Ger More LinkedIn Shares
+* LinkedIn Giveaway to Get More LinkedIn Shares
 * YouTube Contest and Competition to Grow Your YouTube Channel
 * YouTube Giveaway to Get More Video Views
 * Refer a Friend Viral Giveaway to Get More Website Traffic

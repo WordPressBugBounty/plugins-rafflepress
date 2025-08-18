@@ -543,6 +543,10 @@ function rafflepress_lite_giveaway_api() {
 				$entry_meta['username'] = $_POST['eo']['source_tiktok_username'];
 			}
 
+			if ( $v->type == 'whatsapp-follow' ) {
+				$entry_meta['answer'] = $_POST['eo']['source_whatsapp_number'];
+			}
+
 			if ( $v->type == 'linkedin-follow' ) {
 				$entry_meta['username'] = $_POST['eo']['source_linkedin_username'];
 			}

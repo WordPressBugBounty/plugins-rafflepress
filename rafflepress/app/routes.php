@@ -199,8 +199,45 @@ function rafflepress_lite_remove_menus() {
 	remove_submenu_page( 'rafflepress_lite', 'rafflepress_lite_debug' );
 }
 
+// Add nonce to 'Add New' submenu URL for CSRF protection via JavaScript
+add_action( 'admin_footer', 'rafflepress_lite_add_nonce_to_menu' );
+
+function rafflepress_lite_add_nonce_to_menu() {
+	// Only run on admin pages where the menu is visible
+	if ( ! current_user_can( apply_filters( 'rafflepress_menu_capability', 'edit_others_posts' ) ) ) {
+		return;
+	}
+	
+	$nonce = wp_create_nonce( 'rafflepress_add_new' );
+	?>
+	<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		// Find the "Add New" menu item and add nonce to its href
+		$('a[href*="page=rafflepress_lite_add_new"]').each(function() {
+			var currentHref = $(this).attr('href');
+			if (currentHref.indexOf('_wpnonce=') === -1) {
+				$(this).attr('href', currentHref + '&_wpnonce=<?php echo $nonce; ?>');
+			}
+		});
+	});
+	</script>
+	<?php
+}
+
 function rafflepress_lite_dashboard_page() {
 	 require_once RAFFLEPRESS_PLUGIN_PATH . 'resources/views/dashboard.php';
+}
+
+function rafflepress_lite_add_new_page() {
+	// Check capabilities first
+	$menu_capability = apply_filters( 'rafflepress_menu_capability', 'edit_others_posts' );
+	if ( ! current_user_can( $menu_capability ) ) {
+		wp_die( __( 'Sorry, you are not allowed to access this page.', 'rafflepress' ) );
+	}
+	
+	// This function should never be called due to admin_init redirect,
+	// but exists to satisfy WordPress submenu requirements
+	wp_die( __( 'This page should redirect automatically. Please try again.', 'rafflepress' ) );
 }
 
 
@@ -231,7 +268,9 @@ function rafflepress_lite_debug_page() {
 
 /* Short circuit new request */
 
-add_action( 'admin_init', 'rafflepress_lite_new_giveaway', 1 );
+// Secure POST and AJAX handler for giveaway creation
+add_action( 'admin_post_rafflepress_create_giveaway', 'rafflepress_lite_create_giveaway_handler' );
+add_action( 'wp_ajax_rafflepress_lite_create_giveaway', 'rafflepress_lite_create_giveaway_handler' );
 
 
 /* Redirect to SPA */
@@ -244,10 +283,43 @@ function rafflepress_lite_redirect_to_site() {
 		wp_redirect( 'admin.php?page=rafflepress_lite#/settings' );
 		exit();
 	}
-	// add new page
+
+	// add new page - redirect to Vue template chooser (secure creation via AJAX)
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_add_new' ) {
+		// Verify nonce before redirect to prevent CSRF attacks
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_add_new' ) ) {
+			wp_die( __( 'Security check failed. Please try again.', 'rafflepress' ), __( 'Security Error', 'rafflepress' ), array( 'response' => 403 ) );
+		}
 		wp_redirect( 'admin.php?page=rafflepress_lite_builder&_wpnonce=' . wp_create_nonce( 'rafflepress_nonce' ) . '&id=0#/template' );
 		exit();
+	}
+
+	// builder page security check - for direct access
+	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_builder' ) {
+		// Get giveaway ID from URL parameter
+		$giveaway_id = isset( $_GET['id'] ) ? $_GET['id'] : '';
+		
+		// CSRF Protection for new giveaway mode (id=0 or empty)
+		if ( empty( $giveaway_id ) || $giveaway_id == '0' ) {
+			// New giveaway mode requires nonce verification
+			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_nonce' ) ) {
+				wp_die(
+					__( 'Security check failed. Please try again.', 'rafflepress' ),
+					__( 'Security Error', 'rafflepress' ),
+					array( 'response' => 403 )
+				);
+			}
+		}
+		
+		// Capability check - ensure user can manage giveaways
+		$required_capability = apply_filters( 'rafflepress_builder_capability', 'edit_others_posts' );
+		if ( ! current_user_can( $required_capability ) ) {
+			wp_die(
+				__( 'You do not have sufficient permissions to access the giveaway builder.', 'rafflepress' ),
+				__( 'Insufficient Permissions', 'rafflepress' ),
+				array( 'response' => 403 )
+			);
+		}
 	}
 
 	//  about us page
@@ -263,6 +335,7 @@ function rafflepress_lite_redirect_to_site() {
 	}
 }
 
+
 /**
  * Ajax Request Routes
  */
@@ -273,6 +346,7 @@ if ( defined( 'DOING_AJAX' ) ) {
 	add_action( 'wp_ajax_rafflepress_lite_save_api_key', 'rafflepress_lite_save_api_key' );
 	add_action( 'wp_ajax_rafflepress_lite_save_template', 'rafflepress_lite_save_template' );
 	add_action( 'wp_ajax_rafflepress_lite_save_giveaway', 'rafflepress_lite_save_giveaway' );
+	add_action( 'wp_ajax_rafflepress_lite_create_giveaway', 'rafflepress_lite_create_giveaway_handler' );
 	add_action( 'wp_ajax_rafflepress_lite_save_slug', 'rafflepress_lite_save_slug' );
 	add_action( 'wp_ajax_rafflepress_lite_get_utc_offset', 'rafflepress_lite_get_utc_offset' );
 	add_action( 'wp_ajax_rafflepress_lite_save_publish', 'rafflepress_lite_save_publish' );
