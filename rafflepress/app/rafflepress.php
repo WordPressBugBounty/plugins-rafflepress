@@ -536,31 +536,31 @@ function rafflepress_lite_giveaway_api() {
 			// Run any logic to confirm or complete action
 
 			if ( $v->type == 'pinterest-follow' ) {
-				$entry_meta['username'] = $_POST['eo']['source_pinterest_username'];
+				$entry_meta['username'] = sanitize_text_field( $_POST['eo']['source_pinterest_username'] );
 			}
 
 			if ( $v->type == 'tiktok-follow' ) {
-				$entry_meta['username'] = $_POST['eo']['source_tiktok_username'];
+				$entry_meta['username'] = sanitize_text_field( $_POST['eo']['source_tiktok_username'] );
 			}
 
 			if ( $v->type == 'whatsapp-follow' ) {
-				$entry_meta['answer'] = $_POST['eo']['source_whatsapp_number'];
+				$entry_meta['answer'] = sanitize_text_field( $_POST['eo']['source_whatsapp_number'] );
 			}
 
 			if ( $v->type == 'linkedin-follow' ) {
-				$entry_meta['username'] = $_POST['eo']['source_linkedin_username'];
+				$entry_meta['username'] = sanitize_text_field( $_POST['eo']['source_linkedin_username'] );
 			}
 
 			if ( $v->type == 'tweet' ) {
-				$entry_meta['url'] = $_POST['eo']['source_tweet_url'];
+				$entry_meta['url'] = esc_url_raw( $_POST['eo']['source_tweet_url'] );
 			}
 
 			if ( $v->type == 'linkedin-share' ) {
-				$entry_meta['url'] = $_POST['eo']['source_linkedinshare_url'];
+				$entry_meta['url'] = esc_url_raw( $_POST['eo']['source_linkedinshare_url'] );
 			}
 
 			if ( $v->type == 'twitch-follow' ) {
-				$entry_meta['username'] = $_POST['eo']['source_twitch_username'];
+				$entry_meta['username'] = sanitize_text_field( $_POST['eo']['source_twitch_username'] );
 			}
 
 			// Twitter Follow

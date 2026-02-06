@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: SeedProd <support@seedprod.com>\n"
 "Last-Translator: John Turner <john@seedprod.com>\n"
-"POT-Creation-Date: 2025-08-18 13:17+0000\n"
+"POT-Creation-Date: 2025-11-13 14:14+0000\n"
 "Report-Msgid-Bugs-To: https://seedprod.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -259,11 +259,11 @@ msgstr ""
 msgid "Live Preview"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:46, build/rafflepress/app/giveaway.php:43, build/rafflepress/app/routes.php:291, build/rafflepress/app/routes.php:307
+#: build/rafflepress/app/giveaway.php:46, build/rafflepress/app/giveaway.php:43, build/rafflepress/app/routes.php:365, build/rafflepress/app/routes.php:381
 msgid "Security check failed. Please try again."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:47, build/rafflepress/app/routes.php:291, build/rafflepress/app/routes.php:308
+#: build/rafflepress/app/giveaway.php:47, build/rafflepress/app/routes.php:365, build/rafflepress/app/routes.php:382
 msgid "Security Error"
 msgstr ""
 
@@ -271,7 +271,7 @@ msgstr ""
 msgid "You do not have sufficient permissions to create giveaways."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:59, build/rafflepress/app/routes.php:319
+#: build/rafflepress/app/giveaway.php:59, build/rafflepress/app/routes.php:393
 msgid "Insufficient Permissions"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 msgid "Scheduled - Starts in"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:307
+#: build/rafflepress/app/giveaway.php:307, build/rafflepress/app/routes.php:295
 msgid "Disabled"
 msgstr ""
 
@@ -475,7 +475,7 @@ msgstr ""
 msgid "Builder"
 msgstr ""
 
-#: build/rafflepress/app/routes.php:235
+#: build/rafflepress/app/routes.php:235, build/rafflepress/app/routes.php:251, build/rafflepress/app/routes.php:344
 msgid "Sorry, you are not allowed to access this page."
 msgstr ""
 
@@ -483,7 +483,39 @@ msgstr ""
 msgid "This page should redirect automatically. Please try again."
 msgstr ""
 
-#: build/rafflepress/app/routes.php:318
+#: build/rafflepress/app/routes.php:292
+msgid "Debug Status"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:294
+msgid "Current status:"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:295
+msgid "Enabled"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:299
+msgid "Enable Debug"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:301
+msgid "Disable Debug"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:306
+msgid "Debug Log"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:309
+msgid "Clear Debug Log"
+msgstr ""
+
+#: build/rafflepress/app/routes.php:314
+msgid "No debug logs available."
+msgstr ""
+
+#: build/rafflepress/app/routes.php:392
 msgid "You do not have sufficient permissions to access the giveaway builder."
 msgstr ""
 

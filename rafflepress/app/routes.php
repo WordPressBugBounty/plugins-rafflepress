@@ -246,24 +246,80 @@ function rafflepress_lite_builder_page() {
 }
 
 function rafflepress_lite_debug_page() {
-	 $log = get_option( 'rafflepress_log' );
-	echo 'Debug Log (Clear query param: rp-clear-debug=1)';
-	echo( $log );
-	echo '<br>';
-	echo '<br><br>Debug On or Off (Enable query param: rp-enable=1 for on and rp-enable=2 for off)';
-	echo( get_option( 'rafflepress_enable_log' ) );
+	// Verify user has admin capabilities
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( __( 'Sorry, you are not allowed to access this page.', 'rafflepress' ), 403 );
+	}
+
+	// CSRF check is now handled earlier in rafflepress_lite_debug_csrf_check()
+	// Process actions after nonce verification
+	$action_performed = false;
+	$action_message = '';
 
 	// clear log
 	if ( ! empty( $_GET['rp-clear-debug'] ) ) {
 		update_option( 'rafflepress_log', '' );
+		$action_performed = true;
+		$action_message = 'Debug log cleared successfully.';
 	}
+
 	// turn on or off debug
 	if ( ! empty( $_GET['rp-enable'] ) && $_GET['rp-enable'] == '1' ) {
 		update_option( 'rafflepress_enable_log', true );
+		$action_performed = true;
+		$action_message = 'Debug logging enabled.';
 	}
 	if ( ! empty( $_GET['rp-enable'] ) && $_GET['rp-enable'] == '2' ) {
 		update_option( 'rafflepress_enable_log', false );
+		$action_performed = true;
+		$action_message = 'Debug logging disabled.';
 	}
+
+	$log = get_option( 'rafflepress_log' );
+	$debug_enabled = get_option( 'rafflepress_enable_log' );
+	$nonce = wp_create_nonce( 'rafflepress_debug_action' );
+	?>
+	<div class="wrap">
+		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+
+		<?php if ( $action_performed ) : ?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php echo esc_html( $action_message ); ?></p>
+			</div>
+		<?php endif; ?>
+
+		<div class="card" style="max-width: 100%;">
+			<h2 class="title"><?php _e( 'Debug Status', 'rafflepress' ); ?></h2>
+			<p>
+				<?php _e( 'Current status:', 'rafflepress' ); ?>
+				<strong><?php echo $debug_enabled ? esc_html__( 'Enabled', 'rafflepress' ) : esc_html__( 'Disabled', 'rafflepress' ); ?></strong>
+			</p>
+			<p>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-enable' => '1', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="button button-primary"><?php _e( 'Enable Debug', 'rafflepress' ); ?></a>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-enable' => '2', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="button"><?php _e( 'Disable Debug', 'rafflepress' ); ?></a>
+			</p>
+		</div>
+
+		<div class="card" style="max-width: 100%; margin-top: 20px;">
+			<h2 class="title"><?php _e( 'Debug Log', 'rafflepress' ); ?></h2>
+			<p>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-clear-debug' => '1', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="button"><?php _e( 'Clear Debug Log', 'rafflepress' ); ?></a>
+			</p>
+			<div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-radius: 3px; max-height: 500px; overflow: auto; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;">
+				<?php
+				if ( empty( $log ) ) {
+					echo '<em>' . esc_html__( 'No debug logs available.', 'rafflepress' ) . '</em>';
+				} else {
+					echo esc_html( $log );
+				}
+				?>
+			</div>
+		</div>
+	</div>
+	<?php
 }
 
 /* Short circuit new request */
@@ -274,6 +330,24 @@ add_action( 'wp_ajax_rafflepress_lite_create_giveaway', 'rafflepress_lite_create
 
 
 /* Redirect to SPA */
+
+add_action( 'admin_init', 'rafflepress_lite_debug_csrf_check', 0 );
+
+function rafflepress_lite_debug_csrf_check() {
+	// CSRF Protection for debug page - check early before admin UI loads
+	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_debug' ) {
+		if ( ! empty( $_GET['rp-clear-debug'] ) || ! empty( $_GET['rp-enable'] ) ) {
+			// Check nonce for any state-changing operation
+			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_debug_action' ) ) {
+				// Use WordPress default permission denied error
+				wp_die(
+					__( 'Sorry, you are not allowed to access this page.', 'rafflepress' ),
+					403
+				);
+			}
+		}
+	}
+}
 
 add_action( 'admin_init', 'rafflepress_lite_redirect_to_site', 1 );
 

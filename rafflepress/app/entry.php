@@ -92,35 +92,35 @@ function rafflepress_lite_entries_datatable() {
 				$extra_details = '';
 				if ( ! empty( $meta->posts_url ) ) {
 					$posts_url     = stripslashes( $meta->posts_url );
-					$extra_details = 'Url:' . $posts_url . ' <br/>';
+					$extra_details = 'Url:' . esc_html( $posts_url ) . ' <br/>';
 				}
 
 				if ( ! empty( $meta->question ) ) {
 					$answer   = stripslashes( $meta->answer );
 					$question = stripslashes( $meta->question );
-					$details  = $extra_details . 'Q: ' . $question . '<br>A: ' . $answer;
+					$details  = $extra_details . 'Q: ' . esc_html( $question ) . '<br>A: ' . esc_html( $answer );
 				} else {
 					if ( ! empty( $meta->answer ) ) {
 						$answer  = stripslashes( $meta->answer );
-						$details = $extra_details . 'A: ' . $answer;
+						$details = $extra_details . 'A: ' . esc_html( $answer );
 					}
 				}
 
 				if ( ! empty( $meta->username ) ) {
-					$details = __( 'Username: ', 'rafflepress' ) . $meta->username;
+					$details = __( 'Username: ', 'rafflepress' ) . esc_html( $meta->username );
 				}
 				if ( ! empty( $meta->ref_email ) ) {
-					$details = __( 'Signed Up: ', 'rafflepress' ) . $meta->ref_email;
+					$details = __( 'Signed Up: ', 'rafflepress' ) . esc_html( $meta->ref_email );
 				}
 				if ( ! empty( $meta->url ) ) {
-					$details = '<a href="' . $meta->url . '" target="_blank">' . $meta->url . '</a>';
+					$details = '<a href="' . esc_url( $meta->url ) . '" target="_blank">' . esc_html( $meta->url ) . '</a>';
 				}
 				if ( ! empty( $meta->confirm ) ) {
 					$details = 'Confirmed Double Optin';
 				}
 
 				if ( ! empty( $meta->image_url ) ) {
-					$details = '<img src="' . $meta->image_url . '" style="max-width:100%;heigh:auto">';
+					$details = '<img src="' . esc_url( $meta->image_url ) . '" style="max-width:100%;heigh:auto">';
 				}
 			}
 
