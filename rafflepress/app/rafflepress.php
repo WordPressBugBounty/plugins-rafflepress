@@ -1066,8 +1066,8 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 		$is_gb_editor = defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_REQUEST['context'] ) && 'edit' === $_REQUEST['context'];
 	if ( $is_gb_editor ) {
 		$iframe = '<iframe id="rafflepress-' . $iframe_uid . '" ' .
-			'src="' . home_url() . '/rafflepress/' . $id . '?iframe=1&giframe=' . $a['giframe'] .
-			'&rpr=' . $ref . '&parent_url=' . urlencode( $parent_url ) . '&' . mt_rand( 1, 99999 ) . '" ' .
+			'src="' . trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode( $id ) . '&iframe=1&giframe=' . urlencode( $a['giframe'] ) .
+			'&rpr=' . urlencode( $ref ) . '&parent_url=' . urlencode( $parent_url ) . '&' . mt_rand( 1, 99999 ) . '" ' .
 			'frameborder="0" scrolling="no" allowtransparency="true" ' . $style . ' ' .
 			// 'onload="rafflepress_resize_iframe_' . $iframe_uid . '(this)"' . // causes error & unnecessary due to overlay
 			'></iframe>';

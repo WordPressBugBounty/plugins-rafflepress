@@ -1029,7 +1029,9 @@ body.rafflepress-body #wpwrap{background:#f1f1f1}
 .rafflepress-modal-body{margin:20px 0}
 .rafflepress-modal-enter,.rafflepress-modal-leave{opacity:0}
 .rafflepress-modal-enter .rafflepress-modal-container,.rafflepress-modal-leave .rafflepress-modal-container{-webkit-transform:scale(1.1);transform:scale(1.1)}
-.rafflepress input[type="checkbox"],.rafflepress input[type="radio"]{margin:0}
+.rafflepress input[type="checkbox"],.rafflepress input[type="radio"]{margin:0;-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}
+.rafflepress input[type="checkbox"]{-webkit-appearance:checkbox}
+.rafflepress input[type="radio"]{-webkit-appearance:radio}
 .rafflepress-sidebar-nav.active:before{position:absolute;right:-10px;margin-top:28px;display:block;width:20px;height:20px;content:"";background-color:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-bottom:1px solid transparent;border-right:1px solid rgba(0,0,0,0.05)}
 .rafflepress .modal{z-index:99999;background-color:rgba(0,0,0,0.5)}
 .rafflepress .modal-dialog{margin:80px auto}

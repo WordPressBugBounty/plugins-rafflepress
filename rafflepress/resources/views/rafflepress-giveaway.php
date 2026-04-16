@@ -139,6 +139,7 @@ if ( empty( $giveaway->active ) && empty( $_GET['rafflepress-preview'] ) ) {
 	exit;
 }
 
+
 	// Put up a note to admin if disabled
 	// if (current_user_can( apply_filters('rafflepress_manage_options_capability', 'manage_options') ) && empty($giveaway->active)) {
 	//     $disabled_msg = __('Giveaway is Disabled', 'rafflepress');

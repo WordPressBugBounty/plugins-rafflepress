@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "rafflepress/giveaway-selector",
+  "title": "RafflePress",
+  "category": "widgets",
+  "description": "Select and display one of your giveaways",
+  "keywords": ["giveaway"],
+  "attributes": {
+    "giveawayId": { "type": "string" }
+  },
+  "editorStyle": "rafflepress-gutenberg-giveaway-selector"
+}

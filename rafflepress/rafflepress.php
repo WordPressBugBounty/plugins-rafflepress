@@ -3,7 +3,8 @@
 Plugin Name: RafflePress Lite
 Plugin URI: https://www.rafflepress.com
 Description: RafflePress allows you to easily create giveaways, contests and rewards in WordPress
-Version:  1.12.21
+Version:  1.12.22
+Requires at least: 6.3
 Author: RafflePress
 Author URI: https://www.rafflepress.com
 TextDomain: rafflepress
@@ -16,17 +17,17 @@ License: GPLv2 or later
  */
 define( 'RAFFLEPRESS_BUILD', 'lite' );
 define( 'RAFFLEPRESS_SLUG', 'rafflepress/rafflepress.php' );
-define( 'RAFFLEPRESS_VERSION', '1.12.21' );
+define( 'RAFFLEPRESS_VERSION', '1.12.22' );
 define( 'RAFFLEPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 // Example output: /Applications/MAMP/htdocs/wordpress/wp-content/plugins/rafflepress/
 define( 'RAFFLEPRESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 // Example output: http://localhost:8888/wordpress/wp-content/plugins/rafflepress/
 if ( defined( 'RAFFLEPRESS_LOCAL_JS' ) ) {
-	define( 'RAFFLEPRESS_API_URL', 'http://app.rafflepress.test/v1/' );
+	define( 'RAFFLEPRESS_API_URL', 'https://app.rafflepress.test/v1/' );
 
-	define( 'RAFFLEPRESS_WEB_API_URL', 'http://app.rafflepress.test/' );
+	define( 'RAFFLEPRESS_WEB_API_URL', 'https://app.rafflepress.test/' );
 
-	define( 'RAFFLEPRESS_CALLBACK_URL', 'http://app.rafflepress.test/' );
+	define( 'RAFFLEPRESS_CALLBACK_URL', 'https://app.rafflepress.test/' );
 
 } else {
 	define( 'RAFFLEPRESS_API_URL', 'https://api.rafflepress.com/v1/' );

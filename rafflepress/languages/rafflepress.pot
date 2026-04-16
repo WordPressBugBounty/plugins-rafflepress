@@ -1,4 +1,4 @@
-# Copyright (C) 2025 RafflePress
+# Copyright (C) 2026 RafflePress
 # This file is distributed under the same license as the RafflePress package.
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: SeedProd <support@seedprod.com>\n"
 "Last-Translator: John Turner <john@seedprod.com>\n"
-"POT-Creation-Date: 2025-11-13 14:14+0000\n"
+"POT-Creation-Date: 2026-04-14 18:35+0000\n"
 "Report-Msgid-Bugs-To: https://seedprod.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -227,35 +227,35 @@ msgstr ""
 msgid "Could not activate addon. Please activate from the Plugins page."
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:33
+#: build/rafflepress/app/gblock.php:27
 msgid "RafflePress"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:34
+#: build/rafflepress/app/gblock.php:28
 msgid "Select and display one of your giveaways"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:35
+#: build/rafflepress/app/gblock.php:29
 msgid "giveaway"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:36
+#: build/rafflepress/app/gblock.php:30
 msgid "Select a Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:37
+#: build/rafflepress/app/gblock.php:31
 msgid "Giveaway Settings"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:38
+#: build/rafflepress/app/gblock.php:32
 msgid "Giveaway"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:78
+#: build/rafflepress/app/gblock.php:72
 msgid "RafflePress Giveaway Preview"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:124, build/rafflepress/resources/views/rafflepress-giveaway.php:788
+#: build/rafflepress/app/gblock.php:125, build/rafflepress/resources/views/rafflepress-giveaway.php:789
 msgid "Live Preview"
 msgstr ""
 
@@ -371,7 +371,7 @@ msgstr ""
 msgid "Invalid action token."
 msgstr ""
 
-#: build/rafflepress/app/rafflepress.php:490, build/rafflepress/app/rafflepress.php:180, build/rafflepress/resources/views/rafflepress-giveaway.php:215
+#: build/rafflepress/app/rafflepress.php:490, build/rafflepress/app/rafflepress.php:180, build/rafflepress/resources/views/rafflepress-giveaway.php:216
 msgid "This giveaway is not currently running."
 msgstr ""
 
@@ -3049,10 +3049,10 @@ msgstr ""
 msgid "No Giveaway Found"
 msgstr ""
 
-#: build/rafflepress/resources/views/rafflepress-giveaway.php:220
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:221
 msgid "This giveaway has ended."
 msgstr ""
 
-#: build/rafflepress/resources/views/rafflepress-giveaway.php:791
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:792
 msgid "Preview All Actions"
 msgstr ""

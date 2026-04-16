@@ -13,14 +13,8 @@ if ( ! function_exists( 'rafflepress_register_block' ) ) {
 		);
 
 		register_block_type(
-			'rafflepress/giveaway-selector',
+			__DIR__,
 			array(
-				'attributes'      => array(
-					'giveawayId' => array(
-						'type' => 'string',
-					),
-				),
-				'editor_style'    => 'rafflepress-gutenberg-giveaway-selector',
 				'render_callback' => 'rafflepress_get_form_html',
 			)
 		);
@@ -41,7 +35,7 @@ if ( ! function_exists( 'rafflepress_enqueue_block_editor_assets' ) ) {
 		wp_enqueue_script(
 			'rafflepress-gutenberg-giveaway-selector',
 			RAFFLEPRESS_PLUGIN_URL . 'public/js/gblock.js',
-			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-server-side-render' ),
+			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-server-side-render', 'wp-block-editor' ),
 			RAFFLEPRESS_VERSION,
 			true
 		);
@@ -82,17 +76,19 @@ if ( ! function_exists( 'rafflepress_get_form_html' ) ) {
             <style>
             .overlay {
                 position: relative;
+                max-height: 500px;
+                overflow: hidden;
             }
             .overlay::before {
-                background-image: linear-gradient( top, 
+                background-image: linear-gradient( top,
                         rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
-                    background-image: -moz-linear-gradient( top, 
+                    background-image: -moz-linear-gradient( top,
                         rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
-                    background-image: -ms-linear-gradient( top, 
+                    background-image: -ms-linear-gradient( top,
                         rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
-                    background-image: -o-linear-gradient( top, 
+                    background-image: -o-linear-gradient( top,
                         rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
-                    background-image: -webkit-linear-gradient( top, 
+                    background-image: -webkit-linear-gradient( top,
                         rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
                 content: '$preview_txt';
                 height: 100%;
@@ -103,15 +99,19 @@ if ( ! function_exists( 'rafflepress_get_form_html' ) ) {
 
             }
             .rafflepress-preview-button{
-                position: absolute;
+                display: block;
                 width: 207px;
                 text-align: center;
-                left: 0;
-                right: 0;
-				color: #fff !important;
-                margin-left: auto !important;
-                margin-right: auto !important;
-                top: 610px;
+                color: #fff !important;
+                background: #2271b1;
+                border: 1px solid #2271b1;
+                border-radius: 3px;
+                padding: 6px 12px;
+                margin: 10px auto 0;
+                text-decoration: none;
+                font-size: 13px;
+                line-height: 2;
+                cursor: pointer;
             }
             </style>
 
@@ -121,8 +121,8 @@ if ( ! function_exists( 'rafflepress_get_form_html' ) ) {
 
 		echo do_shortcode( "[rafflepress_gutenberg id='$id' min_height='200px' giframe='true']" );
 		if ( $is_gb_editor ) {
-			echo '<a href="' . home_url() . '?rafflepress_page=rafflepress_render&rafflepress_id=' . $id . '&rafflepress-preview=1" target="_blank" class="button-primary rafflepress-preview-button">' . __( 'Live Preview', 'rafflepress' ) . '</a>';
 			echo '</div>';
+			echo '<a href="' . home_url() . '?rafflepress_page=rafflepress_render&rafflepress_id=' . $id . '&rafflepress-preview=1" target="_blank" class="button-primary rafflepress-preview-button">' . __( 'Live Preview', 'rafflepress' ) . '</a>';
 		}
 
 		return ob_get_clean();
