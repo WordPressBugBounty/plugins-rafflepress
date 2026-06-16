@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * Ajax handler for grabbing the upgrade url.

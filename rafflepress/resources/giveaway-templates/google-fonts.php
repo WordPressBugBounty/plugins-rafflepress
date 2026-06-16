@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 // $rafflepress_fontfile = RAFFLEPRESS_PLUGIN_PATH . 'resources/webfonts.json';
 // $rafflepress_fonts_json = file_get_contents($rafflepress_fontfile);

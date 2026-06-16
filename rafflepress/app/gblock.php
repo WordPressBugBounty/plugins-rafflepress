@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 	add_action( 'init', 'rafflepress_register_block' );
 	add_action( 'enqueue_block_editor_assets', 'rafflepress_enqueue_block_editor_assets' );
@@ -69,9 +74,10 @@ if ( ! function_exists( 'rafflepress_get_form_html' ) ) {
 
 		$is_gb_editor = defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_REQUEST['context'] ) && 'edit' === $_REQUEST['context'];
 
-		$preview_txt = __( 'RafflePress Giveaway Preview', 'rafflepress' );
+		$preview_txt = esc_html__( 'RafflePress Giveaway Preview', 'rafflepress' );
 		ob_start();
 		if ( $is_gb_editor ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static preview CSS block; the only interpolated value ($preview_txt) is escaped at its assignment above.
 			echo "
             <style>
             .overlay {
@@ -122,7 +128,7 @@ if ( ! function_exists( 'rafflepress_get_form_html' ) ) {
 		echo do_shortcode( "[rafflepress_gutenberg id='$id' min_height='200px' giframe='true']" );
 		if ( $is_gb_editor ) {
 			echo '</div>';
-			echo '<a href="' . home_url() . '?rafflepress_page=rafflepress_render&rafflepress_id=' . $id . '&rafflepress-preview=1" target="_blank" class="button-primary rafflepress-preview-button">' . __( 'Live Preview', 'rafflepress' ) . '</a>';
+			echo '<a href="' . esc_url( home_url() . '?rafflepress_page=rafflepress_render&rafflepress_id=' . $id . '&rafflepress-preview=1' ) . '" target="_blank" class="button-primary rafflepress-preview-button">' . esc_html__( 'Live Preview', 'rafflepress' ) . '</a>';
 		}
 
 		return ob_get_clean();

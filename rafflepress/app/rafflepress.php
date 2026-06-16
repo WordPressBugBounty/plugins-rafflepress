@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /*
  * Get Giveaway Comment Multiple Urls data for logged user.
  */
@@ -752,7 +757,7 @@ function rafflepress_lite_giveaway_api() {
 					$url    = $upload_info['url'];
 				}
 			} else {
-				$errors[] = __( 'Invalid Image', 'raffelpress-pro' );
+				$errors[] = __( 'Invalid Image', 'rafflepress' );
 			}
 		}
 
@@ -907,8 +912,8 @@ function rafflepress_lite_display_shortcode( $atts ) {
 }
 </style>
 
-	<?php $iframe_uid = mt_rand( 10000000, 99999999 ); ?>
-<div id="rafflepress-giveaway-iframe-wrapper-<?php echo $iframe_uid; ?>" class="rafflepress-giveaway-iframe-wrapper rafflepress_iframe_loading"></div>
+	<?php $iframe_uid = wp_rand( 10000000, 99999999 ); ?>
+<div id="rafflepress-giveaway-iframe-wrapper-<?php echo absint( $iframe_uid ); ?>" class="rafflepress-giveaway-iframe-wrapper rafflepress_iframe_loading"></div>
 
 <script>
 function rafflepress_getParameterByName(name, url) {
@@ -939,17 +944,17 @@ function insertIframe( ID, src, minHeight) {
 }
 
 // phpcs:disable
-insertIframe( '<?php echo $iframe_uid; ?>','<?php echo trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ); ?>&<?php echo mt_rand( 1, 99999 ); ?>&rp-email='+rafflepress_getParameterByName('rp-email',location.href)+'&rp-name='+rafflepress_getParameterByName('rp-name',location.href),'<?php echo esc_html( $a['min_height'] ); ?>' );
+insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>&rp-email='+rafflepress_getParameterByName('rp-email',location.href)+'&rp-name='+rafflepress_getParameterByName('rp-name',location.href),'<?php echo esc_html( $a['min_height'] ); ?>' );
 // phpcs:enable
 </script>
 
 <script>
-function rafflepress_resize_iframe_<?php echo $iframe_uid; ?>(){
+function rafflepress_resize_iframe_<?php echo absint( $iframe_uid ); ?>(){
 	iFrameResize({
 		log: false,
 		onMessage: function(messageData) {
 			if (messageData.message == 'rafflepress_loaded') {
-				var el = document.getElementById('rafflepress-giveaway-iframe-wrapper-<?php echo $iframe_uid; ?>');
+				var el = document.getElementById('rafflepress-giveaway-iframe-wrapper-<?php echo absint( $iframe_uid ); ?>');
 				var className = "rafflepress_iframe_loading";
 				if (el.classList)
 					el.classList.remove(className);
@@ -958,7 +963,7 @@ function rafflepress_resize_iframe_<?php echo $iframe_uid; ?>(){
 						'(\\b|$)', 'gi'), ' ');
 			}
 		}
-	}, '#rafflepress-<?php echo $iframe_uid; ?>');
+	}, '#rafflepress-<?php echo absint( $iframe_uid ); ?>');
 };
 
 </script>
@@ -1057,21 +1062,34 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 }
 </style>
 
-	<?php $iframe_uid = mt_rand( 10000000, 99999999 ); ?>
-<div id="rafflepress-giveaway-iframe-wrapper-<?php echo $iframe_uid; ?>" class="rafflepress-giveaway-iframe-wrapper rafflepress_iframe_loading">
+	<?php $iframe_uid = wp_rand( 10000000, 99999999 ); ?>
+<div id="rafflepress-giveaway-iframe-wrapper-<?php echo absint( $iframe_uid ); ?>" class="rafflepress-giveaway-iframe-wrapper rafflepress_iframe_loading">
 
 	<?php
 		// Iframe is inserted with insertIframe() on front end to avoid 3rd-party scripts from lazy-loading.
 		// However, echoing the iframe is needed to render preview in the blocks editor
 		$is_gb_editor = defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_REQUEST['context'] ) && 'edit' === $_REQUEST['context'];
 	if ( $is_gb_editor ) {
-		$iframe = '<iframe id="rafflepress-' . $iframe_uid . '" ' .
-			'src="' . trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode( $id ) . '&iframe=1&giframe=' . urlencode( $a['giframe'] ) .
-			'&rpr=' . urlencode( $ref ) . '&parent_url=' . urlencode( $parent_url ) . '&' . mt_rand( 1, 99999 ) . '" ' .
+		$iframe = '<iframe id="rafflepress-' . absint( $iframe_uid ) . '" ' .
+			'src="' . esc_url( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode( $id ) . '&iframe=1&giframe=' . urlencode( $a['giframe'] ) .
+			'&rpr=' . urlencode( $ref ) . '&parent_url=' . urlencode( $parent_url ) . '&' . absint( wp_rand( 1, 99999 ) ) ) . '" ' .
 			'frameborder="0" scrolling="no" allowtransparency="true" ' . $style . ' ' .
-			// 'onload="rafflepress_resize_iframe_' . $iframe_uid . '(this)"' . // causes error & unnecessary due to overlay
+			// 'onload="rafflepress_resize_iframe_' . absint( $iframe_uid ) . '(this)"' . // causes error & unnecessary due to overlay
 			'></iframe>';
-		echo $iframe;
+		echo wp_kses(
+			$iframe,
+			array(
+				'iframe' => array(
+					'id'               => array(),
+					'src'              => array(),
+					'frameborder'      => array(),
+					'scrolling'        => array(),
+					'allowtransparency' => array(),
+					'style'            => array(),
+					'class'            => array(),
+				),
+			)
+		);
 	}
 	?>
 
@@ -1098,17 +1116,17 @@ function insertIframe( ID, src, minHeight) {
 }
 
 // phpcs:disable
-insertIframe( '<?php echo $iframe_uid; ?>','<?php echo trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ); ?>&<?php echo mt_rand( 1, 99999 ); ?>','<?php echo esc_html( $a['min_height'] ); ?>' );
+insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>','<?php echo esc_html( $a['min_height'] ); ?>' );
 // phpcs:enable
 </script>
 
 <script>
-function rafflepress_resize_iframe_<?php echo $iframe_uid; ?>(){
+function rafflepress_resize_iframe_<?php echo absint( $iframe_uid ); ?>(){
 	iFrameResize({
 		log: false,
 		onMessage: function(messageData) {
 			if (messageData.message == 'rafflepress_loaded') {
-				var el = document.getElementById('rafflepress-giveaway-iframe-wrapper-<?php echo $iframe_uid; ?>');
+				var el = document.getElementById('rafflepress-giveaway-iframe-wrapper-<?php echo absint( $iframe_uid ); ?>');
 				var className = "rafflepress_iframe_loading";
 				if (el.classList)
 					el.classList.remove(className);
@@ -1117,7 +1135,7 @@ function rafflepress_resize_iframe_<?php echo $iframe_uid; ?>(){
 						'(\\b|$)', 'gi'), ' ');
 			}
 		}
-	}, '#rafflepress-<?php echo $iframe_uid; ?>');
+	}, '#rafflepress-<?php echo absint( $iframe_uid ); ?>');
 };
 
 </script>

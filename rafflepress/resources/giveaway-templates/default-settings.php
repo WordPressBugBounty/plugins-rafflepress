@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 $wp_timezone_string           = get_option( 'timezone_string' );
 $rafflepress_default_timezone = 'UTC';

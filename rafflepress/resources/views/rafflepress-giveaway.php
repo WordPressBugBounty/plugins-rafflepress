@@ -1,4 +1,10 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript -- This file is RafflePress's standalone giveaway render (included by app/standalone.php and app/routes.php for iframe embedding). It builds its own HTML document and never calls wp_head()/wp_footer(), so the wp_enqueue pipeline does not run; scripts (jQuery, reCAPTCHA, Instagram/TikTok/Facebook SDKs, the Vue app) are emitted inline by design.
 
 	// check if is_preview
 	$is_preview   = false;
@@ -63,7 +69,7 @@ if (
 	//$token = get_option('rafflepress_token');
 
 if ( empty( $giveaway ) ) {
-	wp_die( __( 'No Giveaway Found', 'rafflepress' ) );
+	wp_die( esc_html__( 'No Giveaway Found', 'rafflepress' ) );
 }
 
 
@@ -409,7 +415,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 			<html>
 			<head>
 			<!-- Open Graph -->
-			<meta property="og:url" content="<?php echo $ref_url; ?>" />
+			<meta property="og:url" content="<?php echo esc_url( $ref_url ); ?>" />
 			<meta property="og:type" content="website" />
 			<meta property="og:title" content="<?php echo esc_attr( $title ); ?>" />
 
@@ -425,7 +431,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 			<meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>" />
 			<meta name="twitter:description" content="<?php echo esc_attr( $share_text_twitter ); ?>" />
 			<?php if ( ! empty( $share_image_twitter ) ) : ?>
-			<meta property="twitter:image" content="<?php echo $share_image_twitter; ?>" />
+			<meta property="twitter:image" content="<?php echo esc_attr( $share_image_twitter ); ?>" />
 			<?php endif; ?>
 
 			<?php
@@ -442,7 +448,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 			echo PHP_EOL;
 			echo 'rp_s_c("rafflepress_ref_"+urlParams.get("rpid"), urlParams.get("rpr"), 365);';
 			echo PHP_EOL;
-			echo 'window.location.replace("' . $url . '");';
+			echo 'window.location.replace("' . esc_url_raw( $url ) . '");';
 			echo PHP_EOL;
 			echo '</script>';
 			?>
@@ -472,7 +478,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Open Graph -->
-	<meta property="og:url" content="<?php echo $ref_url; ?>" />
+	<meta property="og:url" content="<?php echo esc_url( $ref_url ); ?>" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="<?php echo esc_attr( $title ); ?>" />
 
@@ -488,7 +494,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	<meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>" />
 	<meta name="twitter:description" content="<?php echo esc_attr( $share_text_twitter ); ?>" />
 	<?php if ( ! empty( $share_image_twitter ) ) : ?>
-	<meta property="twitter:image" content="<?php echo $share_image_twitter; ?>" />
+	<meta property="twitter:image" content="<?php echo esc_attr( $share_image_twitter ); ?>" />
 	<?php endif; ?>
 
 
@@ -536,12 +542,12 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	<?php
 
 	if ( ! empty( $settings->page_background_image ) && empty( $_GET['iframe'] ) ) {
-		echo "
+		echo '
 .rafflepress-giveaway body {
-            background-image: url($settings->page_background_image);
+            background-image: url(' . esc_url( $settings->page_background_image ) . ');
         }
 
-        ";
+        ';
 
 	}
 
@@ -570,38 +576,38 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	}
 
 	if ( ! empty( $settings->background_color ) && 1 == 0 ) {
-		echo "
+		echo '
 #rafflepress-wrapper {
-            background-color: $settings->background_color;
+            background-color: ' . esc_attr( $settings->background_color ) . ';
         }
 
-        ";
+        ';
 
 	}
 
 	if ( ! empty( $settings->text_color ) && 1 == 0 ) {
-		echo "
+		echo '
 #rafflepress-wrapper {
-            color: $settings->text_color;
+            color: ' . esc_attr( $settings->text_color ) . ';
         }
 
-        ";
+        ';
 
 	}
 
 
 	if ( ! empty( $settings->border_color ) && 1 == 0 ) {
 
-		echo "
+		echo '
 #rafflepress-countdown,
         #rafflepress-my-entires,
         #rafflepress-prize-info,
         #rafflepress-giveaway-login,
         #rafflepress-giveaway-entries {
-            border-color: $settings->border_color;
+            border-color: ' . esc_attr( $settings->border_color ) . ';
         }
 
-        ";
+        ';
 
 	}
 
@@ -731,9 +737,9 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 		try {
 			$less  = new rafflepress_lessc();
 			$style = $less->parse( $css );
-			echo $style;
+			echo $style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $style is compiled CSS generated from plugin-controlled LESS with only a sanitized hex color substituted; escaping would break the stylesheet.
 		} catch ( Exception $e ) {
-			echo $e;
+			echo esc_html( $e->getMessage() );
 		}
 	}
 
@@ -749,7 +755,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	?>
 
 	<script data-cfasync="false"
-		src="<?php echo RAFFLEPRESS_PLUGIN_URL; ?>public/js/iframeResizer.contentWindow.min.js?ver=<?php echo RAFFLEPRESS_VERSION; ?>">
+		src="<?php echo esc_url( RAFFLEPRESS_PLUGIN_URL ); ?>public/js/iframeResizer.contentWindow.min.js?ver=<?php echo esc_attr( RAFFLEPRESS_VERSION ); ?>">
 	</script>
 
 
@@ -774,9 +780,9 @@ if ( $is_preview ) {
 	<nav class="navbar navbar-default"
 		style="height: 67px;border-top:0;border-radius:0; display:flex; align-items:center;background-color:#fafbfc">
 		<div style="flex:1">
-			<a href="<?php echo admin_url() . 'admin.php?page=rafflepress_lite#/'; ?>"><img style="    width: 45px;
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=rafflepress_lite' ) . '#/' ); ?>"><img style="    width: 45px;
 	display: inline-block;
-	margin-left:25px  " src="<?php echo RAFFLEPRESS_PLUGIN_URL; ?>/public/img/rafflepress-icon.png"
+	margin-left:25px  " src="<?php echo esc_url( RAFFLEPRESS_PLUGIN_URL ); ?>/public/img/rafflepress-icon.png"
 					alt="RafflePress Logo"></a>
 		</div>
 
@@ -785,11 +791,11 @@ if ( $is_preview ) {
   justify-content: center;
   align-items: center;">
 			<div class="btn-group" role="group">
-				<a href="<?php echo $actual_link; ?>&mode=live"
-					class="btn btn-primary btn-preview <?php echo ( $preview_mode == 'live' ) ? 'active' : ''; ?>"><?php _e( 'Live Preview', 'rafflepress' ); ?></a>
-				<a href="<?php echo $actual_link; ?>&mode=actions"
+				<a href="<?php echo esc_url( $actual_link ); ?>&mode=live"
+					class="btn btn-primary btn-preview <?php echo ( $preview_mode == 'live' ) ? 'active' : ''; ?>"><?php esc_html_e( 'Live Preview', 'rafflepress' ); ?></a>
+				<a href="<?php echo esc_url( $actual_link ); ?>&mode=actions"
 					class="btn btn-primary btn-preview <?php echo ( $preview_mode == 'actions' ) ? 'active' : ''; ?>">
-					<?php _e( 'Preview All Actions', 'rafflepress' ); ?></a>
+					<?php esc_html_e( 'Preview All Actions', 'rafflepress' ); ?></a>
 			</div>
 		</div>
 		<div style="  flex: 1;"> </div>
@@ -821,7 +827,7 @@ if ( $is_preview ) {
 		<script>
 			window.fbAsyncInit = function() {
 				FB.init({
-				appId            : '<?php echo $facebook_app_id; ?>',
+				appId            : '<?php echo esc_js( $facebook_app_id ); ?>',
 				autoLogAppEvents : true,
 				xfbml            : true,
 				version          : 'v8.0'
@@ -843,7 +849,7 @@ if ( $is_preview ) {
 		
 		<?php
 		if ( ! empty( $disabled_msg ) ) {
-				echo '<p style="text-align:center;font-weight:bold;">' . $disabled_msg . '</p>';
+				echo '<p style="text-align:center;font-weight:bold;">' . esc_html( $disabled_msg ) . '</p>';
 		}
 		?>
 
@@ -854,13 +860,13 @@ if ( $is_preview ) {
 
 		<script>
 		<?php $ajax_url = html_entity_decode( wp_nonce_url( admin_url( 'admin-ajax.php' ) . '?action=rafflepress_lite_giveaway_api', 'rafflepress_lite_giveaway_api' ) ); ?>
-		var rafflepress_api_url = "<?php echo $ajax_url; ?>";
+		var rafflepress_api_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 		<?php $ajax_url = html_entity_decode( wp_nonce_url( admin_url( 'admin-ajax.php' ) . '?action=rafflepress_lite_giveaway_comment', 'rafflepress_lite_giveaway_comment' ) ); ?>
-		var rafflepress_comments_url = "<?php echo $ajax_url; ?>";
+		var rafflepress_comments_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 		<?php $action_token_ajax_url = html_entity_decode( wp_nonce_url( admin_url( 'admin-ajax.php' ) . '?action=rafflepress_lite_action_token', 'rafflepress_lite_action_token' ) ); ?>
-		var rafflepress_action_token_url = "<?php echo $action_token_ajax_url; ?>";
+		var rafflepress_action_token_url = "<?php echo esc_url_raw( $action_token_ajax_url ); ?>";
 
 		<?php
 		$fb_auth_integration_url = '';
@@ -868,7 +874,7 @@ if ( $is_preview ) {
 
 		var rafflepress_data =
 			<?php
-			echo json_encode(
+			echo wp_json_encode( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode() safely encodes all values as JSON for a JS variable assignment.
 				array(
 					'api_url'                 => RAFFLEPRESS_CALLBACK_URL,
 					'plugin_path'             => RAFFLEPRESS_PLUGIN_URL,
@@ -885,7 +891,7 @@ if ( $is_preview ) {
 					'giveaway'                => $giveaway,
 					'settings'                => $settings,
 					'winners'                 => $winners,
-					'parent_url'              => esc_url($parent_url),
+					'parent_url'              => esc_url( $parent_url ),
 					'referral_url'            => $ref_url,
 					'fb_auth_integration_url' => $fb_auth_integration_url,
 				)
@@ -894,7 +900,7 @@ if ( $is_preview ) {
 			;
 
 		var rafflepress_frontend_translation_data =
-			<?php echo json_encode( $rp_frontend_translations ); ?>;
+			<?php echo wp_json_encode( $rp_frontend_translations ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode() safely encodes all values as JSON for a JS variable assignment. ?>;
 		</script>
 
 		<?php
@@ -906,10 +912,10 @@ if ( $is_preview ) {
 			$vue_app_folder = RAFFLEPRESS_BUILD;
 			?>
 		<script
-			src="<?php echo RAFFLEPRESS_PLUGIN_URL; ?>public/<?php echo $vue_app_folder; ?>/vue-frontend/js/app.js?ver=<?php echo RAFFLEPRESS_VERSION; ?>">
+			src="<?php echo esc_url( RAFFLEPRESS_PLUGIN_URL . 'public/' . $vue_app_folder . '/vue-frontend/js/app.js' ); ?>?ver=<?php echo esc_attr( RAFFLEPRESS_VERSION ); ?>">
 		</script>
 		<script
-			src="<?php echo RAFFLEPRESS_PLUGIN_URL; ?>public/<?php echo $vue_app_folder; ?>/vue-frontend/js/chunk-vendors.js?ver=<?php echo RAFFLEPRESS_VERSION; ?>">
+			src="<?php echo esc_url( RAFFLEPRESS_PLUGIN_URL . 'public/' . $vue_app_folder . '/vue-frontend/js/chunk-vendors.js' ); ?>?ver=<?php echo esc_attr( RAFFLEPRESS_VERSION ); ?>">
 		</script>
 			<?php
 

@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 	// Translation defaults
 	// if (empty($settings->translation_1)) {

@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /*
  * contestants Datatable
@@ -110,7 +115,7 @@ function rafflepress_lite_contestants_datatable() {
 		foreach ( $results as $v ) {
 
 			   // Format Date
-			$created_at = date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
+			$created_at = gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
 
 			$class  = '';
 			$status = '';

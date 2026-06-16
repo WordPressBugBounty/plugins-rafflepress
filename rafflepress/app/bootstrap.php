@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 
 /**
@@ -164,7 +169,7 @@ function rafflepress_lite_scripts_mod( $tag, $handle, $src ) {
 
 	if ( in_array( $handle, $defer_scripts ) ) {
 		//return '<script src="' . $src . '&'.mt_rand(1, 99999).'" data-cfasync="false" type="text/javascript"></script>' . "\n";
-		return '<script src="' . $src . '" data-cfasync="false" type="text/javascript"></script>' . "\n";
+		return '<script src="' . $src . '" data-cfasync="false" type="text/javascript"></script>' . "\n"; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- script_loader_tag filter output; the script is already registered/enqueued via wp_enqueue_script(), this only rewrites its tag.
 	}
 
 	return $tag;
@@ -334,6 +339,7 @@ function rafflepress_lite_admin_footer( $text ) {
 
 	if ( ! empty( $current_screen->id ) && strpos( $current_screen->id, 'rafflepress' ) !== false ) {
 		$url  = 'https://wordpress.org/support/plugin/rafflepress/reviews/?filter=5#new-post';
+		/* translators: 1: WordPress.org review page URL, 2: WordPress.org review page URL. */
 		$text = sprintf( __( 'Please rate <strong>RafflePress</strong> <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%2$s" target="_blank">WordPress.org</a> to help us spread the word. Thank you from the RafflePress team!', 'rafflepress' ), $url, $url );
 	}
 	return $text;

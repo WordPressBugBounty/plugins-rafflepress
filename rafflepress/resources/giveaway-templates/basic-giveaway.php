@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $rafflepress_placeholder_image = '';
 if ( RAFFLEPRESS_BUILD == 'pro' ) {
 	$rafflepress_placeholder_image = RAFFLEPRESS_PLUGIN_URL . 'public/img/prize-placeholder.png';

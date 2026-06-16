@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /*
  * Entry Datatable
@@ -72,7 +77,7 @@ function rafflepress_lite_entries_datatable() {
 		foreach ( $results as $v ) {
 
 			 // Format Date
-			$created_at = date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
+			$created_at = gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
 
 			$class = '';
 			if ( ! empty( $v->deleted_at ) ) {
@@ -373,7 +378,7 @@ function rafflepress_lite_pick_winners() {
 				$safe_sql_1         = $wpdb->prepare( $sql_2, $_GET['id'], $_GET['id'] );
 				$num_of_contestants = $wpdb->get_var( $safe_sql_1 );
 				// Get random int
-				$random_int = mt_rand( 0, $num_of_contestants - 1 );
+				$random_int = wp_rand( 0, $num_of_contestants - 1 );
 				$sql       .= ' LIMIT %d,1';
 				$safe_sql   = $wpdb->prepare( $sql, $_GET['id'], $_GET['id'], $random_int );
 			} else {

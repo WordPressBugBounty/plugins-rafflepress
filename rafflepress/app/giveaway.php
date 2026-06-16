@@ -42,9 +42,9 @@ function rafflepress_lite_create_giveaway_handler() {
 		if ( $is_ajax ) {
 			wp_send_json_error( array( 'message' => __( 'Security check failed. Please try again.', 'rafflepress' ) ) );
 		} else {
-			wp_die( 
-				__( 'Security check failed. Please try again.', 'rafflepress' ), 
-				__( 'Security Error', 'rafflepress' ), 
+			wp_die(
+				esc_html__( 'Security check failed. Please try again.', 'rafflepress' ),
+				esc_html__( 'Security Error', 'rafflepress' ),
 				array( 'response' => 403 )
 			);
 		}
@@ -56,7 +56,7 @@ function rafflepress_lite_create_giveaway_handler() {
 		if ( $is_ajax ) {
 			wp_send_json_error( array( 'message' => $error_message ) );
 		} else {
-			wp_die( $error_message, __( 'Insufficient Permissions', 'rafflepress' ), array( 'response' => 403 ) );
+			wp_die( esc_html( $error_message ), esc_html__( 'Insufficient Permissions', 'rafflepress' ), array( 'response' => 403 ) );
 		}
 	}
 
@@ -69,7 +69,7 @@ function rafflepress_lite_create_giveaway_handler() {
 		if ( $is_ajax ) {
 			wp_send_json_error( array( 'message' => $error_message ) );
 		} else {
-			wp_die( $error_message );
+			wp_die( esc_html( $error_message ) );
 		}
 	}
 	
@@ -83,8 +83,8 @@ function rafflepress_lite_create_giveaway_handler() {
 	$timezone = 'UTC';
 
 	// Create giveaway data
-	$starts = date( 'c', strtotime( ' + 2 days' ) );
-	$ends   = date( 'c', strtotime( ' + 16 days' ) );
+	$starts = gmdate( 'c', strtotime( ' + 2 days' ) );
+	$ends   = gmdate( 'c', strtotime( ' + 16 days' ) );
 
 	require_once RAFFLEPRESS_PLUGIN_PATH . 'resources/giveaway-templates/basic-giveaway.php';
 	$settings           = json_decode( $rafflepress_basic_giveaway );
@@ -114,7 +114,7 @@ function rafflepress_lite_create_giveaway_handler() {
 		if ( $is_ajax ) {
 			wp_send_json_error( array( 'message' => $error_message ) );
 		} else {
-			wp_die( $error_message );
+			wp_die( esc_html( $error_message ) );
 		}
 	}
 
@@ -274,7 +274,7 @@ function rafflepress_lite_giveaway_datatable() {
 		foreach ( $results as $v ) {
 
 			// Format Date
-			$created_at = date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
+			$created_at = gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $v->created_at ) );
 
 			$status = __( 'Draft - ', 'rafflepress' ) . '|needs_setup';
 			if ( $v->starts != '0000-00-00 00:00:00' && $v->ends != '0000-00-00 00:00:00' ) {
@@ -335,13 +335,13 @@ function rafflepress_lite_giveaway_datatable() {
 			if ( empty( $v->starts ) || $v->starts == '0000-00-00 00:00:00' ) {
 				$starts = __( 'N/A', 'rafflepress' );
 			} else {
-				$starts = $date = date( get_option( 'date_format' ), strtotime( $settings->starts ) );
+				$starts = $date = gmdate( get_option( 'date_format' ), strtotime( $settings->starts ) );
 			}
 
 			if ( empty( $v->ends ) || $v->ends == '0000-00-00 00:00:00' ) {
 				$ends = __( 'N/A', 'rafflepress' );
 			} else {
-				$ends = $date = date( get_option( 'date_format' ), strtotime( $settings->ends ) );
+				$ends = $date = gmdate( get_option( 'date_format' ), strtotime( $settings->ends ) );
 			}
 
 			// Check if it has Image Submissions or Polls
@@ -928,7 +928,7 @@ function rafflepress_lite_save_giveaway() {
 			//$ends = substr($ends, 0, strpos($ends, 'T'));
 			$ends           = $ends . ' ' . $ends_time;
 			$ends_timestamp = strtotime( $ends . ' ' . $timezone );
-			$ends_utc       = date( 'Y-m-d H:i:s', $ends_timestamp );
+			$ends_utc       = gmdate( 'Y-m-d H:i:s', $ends_timestamp );
 		//} else {
 		//    $ends_utc =  $ends;
 		//}
@@ -937,7 +937,7 @@ function rafflepress_lite_save_giveaway() {
 			//$starts = substr($starts, 0, strpos($starts, 'T'));
 			$starts           = $starts . ' ' . $starts_time;
 			$starts_timestamp = strtotime( $starts . ' ' . $timezone );
-			$starts_utc       = date( 'Y-m-d H:i:s', $starts_timestamp );
+			$starts_utc       = gmdate( 'Y-m-d H:i:s', $starts_timestamp );
 		//} else {
 		//    $starts_utc =  $starts;
 		//}
@@ -1098,12 +1098,12 @@ function rafflepress_lite_get_utc_offset() {
 		//$starts = substr($starts, 0, strpos($starts, 'T'));
 		$starts           = $starts . ' ' . $starts_time;
 		$starts_timestamp = strtotime( $starts . ' ' . $timezone );
-		$starts_utc       = date( 'Y-m-d H:i:s', $starts_timestamp );
+		$starts_utc       = gmdate( 'Y-m-d H:i:s', $starts_timestamp );
 
 		//$ends = substr($ends, 0, strpos($ends, 'T'));
 		$ends           = $ends . ' ' . $ends_time;
 		$ends_timestamp = strtotime( $ends . ' ' . $timezone );
-		$ends_utc       = date( 'Y-m-d H:i:s', $ends_timestamp );
+		$ends_utc       = gmdate( 'Y-m-d H:i:s', $ends_timestamp );
 
 		// countdown status
 		$countdown_status = '';
@@ -1148,8 +1148,8 @@ function rafflepress_lite_save_template() {
 		}
 
 		if ( empty( absint( $_POST['giveaway']['id'] ) ) ) {
-			$starts = date( 'Y-m-d H:i:s', strtotime( ' + 24 hours' ) );
-			$ends   = date( 'Y-m-d H:i:s', strtotime( ' + 14 days' ) );
+			$starts = gmdate( 'Y-m-d H:i:s', strtotime( ' + 24 hours' ) );
+			$ends   = gmdate( 'Y-m-d H:i:s', strtotime( ' + 14 days' ) );
 
 			$giveaway_template_id = sanitize_text_field( $_POST['giveaway']['giveawaytemplate_id'] );
 			if ( $giveaway_template_id == 'basic_giveaway' ) {
@@ -1249,18 +1249,18 @@ function rafflepress_lite_get_automation_tool_list(){
 			if ( array_key_exists( $slug, $all_plugins ) ) {
 				if ( is_plugin_active( $slug ) ) {
 					$response[ $label ] = array(
-						'label'  => __( 'Active', 'seedprod-pro' ),
+						'label'  => __( 'Active', 'rafflepress' ),
 						'status' => 1,
 					);
 				} else {
 					$response[ $label ] = array(
-						'label'  => __( 'Inactive', 'seedprod-pro' ),
+						'label'  => __( 'Inactive', 'rafflepress' ),
 						'status' => 2,
 					);
 				}
 			} else {
 				$response[ $label ] = array(
-					'label'  => __( 'Not Installed', 'seedprod-pro' ),
+					'label'  => __( 'Not Installed', 'rafflepress' ),
 					'status' => 0,
 				);
 			}

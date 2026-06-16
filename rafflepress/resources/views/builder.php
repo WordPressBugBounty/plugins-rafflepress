@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 // translations
 require_once RAFFLEPRESS_PLUGIN_PATH . 'resources/views/backend-translations.php';
@@ -136,28 +141,16 @@ $active_license = false;
 
 // set design
 if ( ! empty( $settings['page_background_color'] ) ) {
-	echo "
-    <style>
-#rafflepress-preview-wrapper {
-        background-color: {$settings['page_background_color']};
-    }
-    </style>
-    ";
+	echo '<style>#rafflepress-preview-wrapper { background-color: ' . esc_attr( $settings['page_background_color'] ) . '; }</style>';
 }
 
 if ( ! empty( $settings['page_background_image'] ) ) {
-	echo "
-    <style>
-    #rafflepress-preview-wrapper{
-        background-image: url({$settings['page_background_image']});
-    }
-    </style>
-    ";
+	echo '<style>#rafflepress-preview-wrapper { background-image: url(' . esc_url( $settings['page_background_image'] ) . '); }</style>';
 }
 
 if ( ! empty( $settings['font'] ) ) {
 	$font = rafflepress_lite_generate_font_output( $settings['font'] );
-	echo $font;
+	echo $font; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static plugin-defined HTML/CSS markup with no dynamic user data; function returns hardcoded Google Fonts <link> tags and <style> blocks only.
 }
 
 // Get help documents
@@ -182,37 +175,37 @@ if (current_user_can('unfiltered_html') && current_user_can('administrator')) {
 
 <script>
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_save_template', 'rafflepress_lite_save_template' ) ); ?>
-var rafflepress_template_save_url = "<?php echo $ajax_url; ?>";
+var rafflepress_template_save_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_save_publish', 'rafflepress_lite_save_publish' ) ); ?>
-var rafflepress_publish_save_url = "<?php echo $ajax_url; ?>";
+var rafflepress_publish_save_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_save_giveaway', 'rafflepress_lite_save_giveaway' ) ); ?>
-var rafflepress_save_giveaway_url = "<?php echo $ajax_url; ?>";
+var rafflepress_save_giveaway_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_save_slug', 'rafflepress_lite_save_slug' ) ); ?>
-var rafflepress_save_slug_url = "<?php echo $ajax_url; ?>";
+var rafflepress_save_slug_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $create_giveaway_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_create_giveaway', 'rafflepress_create_giveaway' ) ); ?>
-var rafflepress_create_giveaway_url = "<?php echo $create_giveaway_url; ?>";
+var rafflepress_create_giveaway_url = "<?php echo esc_url_raw( $create_giveaway_url ); ?>";
 
 <?php $utc_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_get_utc_offset', 'rafflepress_lite_get_utc_offset' ) ); ?>
-var rafflepress_utc_url = "<?php echo $utc_url; ?>";
+var rafflepress_utc_url = "<?php echo esc_url_raw( $utc_url ); ?>";
 
 <?php $get_font_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_get_font', 'rafflepress_lite_get_font' ) ); ?>
-var rafflepress_get_font_url = "<?php echo $get_font_url; ?>";
+var rafflepress_get_font_url = "<?php echo esc_url_raw( $get_font_url ); ?>";
 
 <?php $tools_ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_get_automation_tool_list', 'rafflepress_lite_get_automation_tool_list' ) ); ?>
-var rafflepress_automation_tools_url = "<?php echo $tools_ajax_url; ?>";
+var rafflepress_automation_tools_url = "<?php echo esc_url_raw( $tools_ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_install_addon', 'rafflepress_lite_install_addon' ) ); ?>
-var rafflepress_get_install_automation_url = "<?php echo $ajax_url; ?>";
+var rafflepress_get_install_automation_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_activate_addon', 'rafflepress_lite_activate_addon' ) ); ?>
-var rafflepress_activate_automation_url = "<?php echo $ajax_url; ?>";
+var rafflepress_activate_automation_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $ajax_url = html_entity_decode( wp_nonce_url( 'admin-ajax.php?action=rafflepress_lite_deactivate_addon', 'rafflepress_lite_deactivate_addon' ) ); ?>
-var rafflepress_deactivate_automation_url = "<?php echo $ajax_url; ?>";
+var rafflepress_deactivate_automation_url = "<?php echo esc_url_raw( $ajax_url ); ?>";
 
 <?php $rafflepress_upgrade_link = rafflepress_lite_upgrade_link( '' ); ?>
 

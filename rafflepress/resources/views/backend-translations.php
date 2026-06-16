@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 $rp_backend_translations = array(
 	'txt_201' => __( 'About Us', 'rafflepress' ),
@@ -155,7 +160,7 @@ $rp_backend_translations = array(
 	'txt_317' => __( 'upgrading to PRO', 'rafflepress' ),
 	'txt_318' => __(
 		". As a valued RafflePress Lite user you'll receive
-    <strong>a 50% discount off the regular price</strong>, automatically applied at
+    <strong>a discount off the regular price</strong>, automatically applied at
     checkout!",
 		'rafflepress'
 	),

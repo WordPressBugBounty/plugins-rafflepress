@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  *  Get IP
@@ -7,21 +12,21 @@ function rafflepress_lite_get_ip($only_allow_remote_addr = false) {
 	 $ip = '';
 	if($only_allow_remote_addr == false){
 	if ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) and strlen( $_SERVER['HTTP_X_FORWARDED_FOR'] ) > 6 ) {
-		$ip = strip_tags( $_SERVER['HTTP_X_FORWARDED_FOR'] );
+		$ip = wp_strip_all_tags( $_SERVER['HTTP_X_FORWARDED_FOR'] );
 	} elseif ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) and strlen( $_SERVER['HTTP_CLIENT_IP'] ) > 6 ) {
-		$ip = strip_tags( $_SERVER['HTTP_CLIENT_IP'] );
+		$ip = wp_strip_all_tags( $_SERVER['HTTP_CLIENT_IP'] );
 	} elseif ( ! empty( $_SERVER['REMOTE_ADDR'] ) and strlen( $_SERVER['REMOTE_ADDR'] ) > 6 ) {
-		$ip = strip_tags( $_SERVER['REMOTE_ADDR'] );
+		$ip = wp_strip_all_tags( $_SERVER['REMOTE_ADDR'] );
 	}
 	}else{
 		if ( ! empty( $_SERVER['REMOTE_ADDR'] ) and strlen( $_SERVER['REMOTE_ADDR'] ) > 6 ) {
-			$ip = strip_tags( $_SERVER['REMOTE_ADDR'] );
+			$ip = wp_strip_all_tags( $_SERVER['REMOTE_ADDR'] );
 		}
 	}
 	if ( ! $ip ) {
 		$ip = '127.0.0.1';
 	}
-	return strip_tags( $ip );
+	return wp_strip_all_tags( $ip );
 }
 
 /**
@@ -502,9 +507,11 @@ function rafflepress_lite_get_timezones() {
 			'continent'   => ( $exists[0] ? $zone[0] : '' ),
 			'city'        => ( $exists[1] ? $zone[1] : '' ),
 			'subcity'     => ( $exists[2] ? $zone[2] : '' ),
+			// phpcs:disable WordPress.WP.I18n.TextDomainMismatch, WordPress.WP.I18n.LowLevelTranslationFunction, WordPress.WP.I18n.NonSingularStringLiteralText -- Intentionally mirrors WordPress core's "continents-cities" timezone translations so localized continent/city names are reused.
 			't_continent' => ( $exists[3] ? translate( str_replace( '_', ' ', $zone[0] ), 'continents-cities' ) : '' ),
 			't_city'      => ( $exists[4] ? translate( str_replace( '_', ' ', $zone[1] ), 'continents-cities' ) : '' ),
 			't_subcity'   => ( $exists[5] ? translate( str_replace( '_', ' ', $zone[2] ), 'continents-cities' ) : '' ),
+			// phpcs:enable WordPress.WP.I18n.TextDomainMismatch, WordPress.WP.I18n.LowLevelTranslationFunction, WordPress.WP.I18n.NonSingularStringLiteralText
 		);
 	}
 	usort( $zonen, '_wp_timezone_choice_usort_callback' );
@@ -903,18 +910,18 @@ function rafflepress_lite_get_plugins_list() {
 		if ( array_key_exists( $slug, $all_plugins ) ) {
 			if ( is_plugin_active( $slug ) ) {
 				$response[ $label ] = array(
-					'label'  => __( 'Active', 'seedprod-pro' ),
+					'label'  => __( 'Active', 'rafflepress' ),
 					'status' => 1,
 				);
 			} else {
 				$response[ $label ] = array(
-					'label'  => __( 'Inactive', 'seedprod-pro' ),
+					'label'  => __( 'Inactive', 'rafflepress' ),
 					'status' => 2,
 				);
 			}
 		} else {
 			$response[ $label ] = array(
-				'label'  => __( 'Not Installed', 'seedprod-pro' ),
+				'label'  => __( 'Not Installed', 'rafflepress' ),
 				'status' => 0,
 			);
 		}
@@ -939,11 +946,11 @@ function rafflepress_lite_is_dev_url( $url = '' ) {
 	$is_local_url = false;
 	// Trim it up
 	$url = strtolower( trim( $url ) );
-	// Need to get the host...so let's add the scheme so we can use parse_url
+	// Need to get the host...so let's add the scheme so we can use wp_parse_url
 	if ( false === strpos( $url, 'http://' ) && false === strpos( $url, 'https://' ) ) {
 		$url = 'http://' . $url;
 	}
-	$url_parts = parse_url( $url );
+	$url_parts = wp_parse_url( $url );
 	$host      = ! empty( $url_parts['host'] ) ? $url_parts['host'] : false;
 	if ( ! empty( $url ) && ! empty( $host ) ) {
 		if ( false !== ip2long( $host ) ) {

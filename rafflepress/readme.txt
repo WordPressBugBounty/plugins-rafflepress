@@ -2,8 +2,8 @@
 Contributors: seedprod, smub 
 Tags: giveaways, contests, sweepstakes, competition, loyalty, rewards, facebook, instagram, youtube, pinterest, twitter, giveaway, contest, social media, traffic, email list, website traffic, wordpress giveaway, lead generation, marketing, growth, poll, refer a friend, promotions, referral marketing, prize, engagement
 Requires at least: 4.8
-Tested up to: 6.8
-Stable tag: 1.12.21
+Tested up to: 7.0
+Stable tag: 1.12.22
 Requires PHP: 5.3.3
 License: GNU General Public License v2.0 or later
 

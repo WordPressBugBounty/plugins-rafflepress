@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 
 /**
@@ -216,7 +221,7 @@ function rafflepress_lite_add_nonce_to_menu() {
 		$('a[href*="page=rafflepress_lite_add_new"]').each(function() {
 			var currentHref = $(this).attr('href');
 			if (currentHref.indexOf('_wpnonce=') === -1) {
-				$(this).attr('href', currentHref + '&_wpnonce=<?php echo $nonce; ?>');
+				$(this).attr('href', currentHref + '&_wpnonce=<?php echo esc_js( $nonce ); ?>');
 			}
 		});
 	});
@@ -232,12 +237,12 @@ function rafflepress_lite_add_new_page() {
 	// Check capabilities first
 	$menu_capability = apply_filters( 'rafflepress_menu_capability', 'edit_others_posts' );
 	if ( ! current_user_can( $menu_capability ) ) {
-		wp_die( __( 'Sorry, you are not allowed to access this page.', 'rafflepress' ) );
+		wp_die( esc_html__( 'Sorry, you are not allowed to access this page.', 'rafflepress' ) );
 	}
-	
+
 	// This function should never be called due to admin_init redirect,
 	// but exists to satisfy WordPress submenu requirements
-	wp_die( __( 'This page should redirect automatically. Please try again.', 'rafflepress' ) );
+	wp_die( esc_html__( 'This page should redirect automatically. Please try again.', 'rafflepress' ) );
 }
 
 
@@ -248,7 +253,7 @@ function rafflepress_lite_builder_page() {
 function rafflepress_lite_debug_page() {
 	// Verify user has admin capabilities
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( __( 'Sorry, you are not allowed to access this page.', 'rafflepress' ), 403 );
+		wp_die( esc_html__( 'Sorry, you are not allowed to access this page.', 'rafflepress' ), 403 );
 	}
 
 	// CSRF check is now handled earlier in rafflepress_lite_debug_csrf_check()
@@ -289,24 +294,24 @@ function rafflepress_lite_debug_page() {
 		<?php endif; ?>
 
 		<div class="card" style="max-width: 100%;">
-			<h2 class="title"><?php _e( 'Debug Status', 'rafflepress' ); ?></h2>
+			<h2 class="title"><?php esc_html_e( 'Debug Status', 'rafflepress' ); ?></h2>
 			<p>
-				<?php _e( 'Current status:', 'rafflepress' ); ?>
+				<?php esc_html_e( 'Current status:', 'rafflepress' ); ?>
 				<strong><?php echo $debug_enabled ? esc_html__( 'Enabled', 'rafflepress' ) : esc_html__( 'Disabled', 'rafflepress' ); ?></strong>
 			</p>
 			<p>
 				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-enable' => '1', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
-				   class="button button-primary"><?php _e( 'Enable Debug', 'rafflepress' ); ?></a>
+				   class="button button-primary"><?php esc_html_e( 'Enable Debug', 'rafflepress' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-enable' => '2', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
-				   class="button"><?php _e( 'Disable Debug', 'rafflepress' ); ?></a>
+				   class="button"><?php esc_html_e( 'Disable Debug', 'rafflepress' ); ?></a>
 			</p>
 		</div>
 
 		<div class="card" style="max-width: 100%; margin-top: 20px;">
-			<h2 class="title"><?php _e( 'Debug Log', 'rafflepress' ); ?></h2>
+			<h2 class="title"><?php esc_html_e( 'Debug Log', 'rafflepress' ); ?></h2>
 			<p>
 				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'rafflepress_lite_debug', 'rp-clear-debug' => '1', '_wpnonce' => $nonce ), admin_url( 'admin.php' ) ) ); ?>"
-				   class="button"><?php _e( 'Clear Debug Log', 'rafflepress' ); ?></a>
+				   class="button"><?php esc_html_e( 'Clear Debug Log', 'rafflepress' ); ?></a>
 			</p>
 			<div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-radius: 3px; max-height: 500px; overflow: auto; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;">
 				<?php
@@ -341,7 +346,7 @@ function rafflepress_lite_debug_csrf_check() {
 			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_debug_action' ) ) {
 				// Use WordPress default permission denied error
 				wp_die(
-					__( 'Sorry, you are not allowed to access this page.', 'rafflepress' ),
+					esc_html__( 'Sorry, you are not allowed to access this page.', 'rafflepress' ),
 					403
 				);
 			}
@@ -362,7 +367,7 @@ function rafflepress_lite_redirect_to_site() {
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'rafflepress_lite_add_new' ) {
 		// Verify nonce before redirect to prevent CSRF attacks
 		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_add_new' ) ) {
-			wp_die( __( 'Security check failed. Please try again.', 'rafflepress' ), __( 'Security Error', 'rafflepress' ), array( 'response' => 403 ) );
+			wp_die( esc_html__( 'Security check failed. Please try again.', 'rafflepress' ), esc_html__( 'Security Error', 'rafflepress' ), array( 'response' => 403 ) );
 		}
 		wp_redirect( 'admin.php?page=rafflepress_lite_builder&_wpnonce=' . wp_create_nonce( 'rafflepress_nonce' ) . '&id=0#/template' );
 		exit();
@@ -378,8 +383,8 @@ function rafflepress_lite_redirect_to_site() {
 			// New giveaway mode requires nonce verification
 			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'rafflepress_nonce' ) ) {
 				wp_die(
-					__( 'Security check failed. Please try again.', 'rafflepress' ),
-					__( 'Security Error', 'rafflepress' ),
+					esc_html__( 'Security check failed. Please try again.', 'rafflepress' ),
+					esc_html__( 'Security Error', 'rafflepress' ),
 					array( 'response' => 403 )
 				);
 			}
@@ -389,8 +394,8 @@ function rafflepress_lite_redirect_to_site() {
 		$required_capability = apply_filters( 'rafflepress_builder_capability', 'edit_others_posts' );
 		if ( ! current_user_can( $required_capability ) ) {
 			wp_die(
-				__( 'You do not have sufficient permissions to access the giveaway builder.', 'rafflepress' ),
-				__( 'Insufficient Permissions', 'rafflepress' ),
+				esc_html__( 'You do not have sufficient permissions to access the giveaway builder.', 'rafflepress' ),
+				esc_html__( 'Insufficient Permissions', 'rafflepress' ),
 				array( 'response' => 403 )
 			);
 		}

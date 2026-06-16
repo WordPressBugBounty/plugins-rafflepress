@@ -3,7 +3,7 @@
 Plugin Name: RafflePress Lite
 Plugin URI: https://www.rafflepress.com
 Description: RafflePress allows you to easily create giveaways, contests and rewards in WordPress
-Version:  1.12.22
+Version:  1.12.23
 Requires at least: 6.3
 Author: RafflePress
 Author URI: https://www.rafflepress.com
@@ -12,12 +12,17 @@ Domain Path: /languages
 License: GPLv2 or later
 */
 
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Default Constants
  */
 define( 'RAFFLEPRESS_BUILD', 'lite' );
 define( 'RAFFLEPRESS_SLUG', 'rafflepress/rafflepress.php' );
-define( 'RAFFLEPRESS_VERSION', '1.12.22' );
+define( 'RAFFLEPRESS_VERSION', '1.12.23' );
 define( 'RAFFLEPRESS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 // Example output: /Applications/MAMP/htdocs/wordpress/wp-content/plugins/rafflepress/
 define( 'RAFFLEPRESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -41,7 +46,7 @@ if ( defined( 'RAFFLEPRESS_LOCAL_JS' ) ) {
  * Load Translation
  */
 function rafflepress_lite_load_textdomain() {
-	load_plugin_textdomain( 'rafflepress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'rafflepress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- Pro is distributed outside WordPress.org; explicit text-domain loading is required for bundled translations.
 }
 add_action( 'plugins_loaded', 'rafflepress_lite_load_textdomain' );
 

@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 
 /**
@@ -9,7 +14,7 @@ add_action( 'admin_init', 'rafflepress_lite_welcome_screen_do_activation_redirec
 function rafflepress_lite_welcome_screen_do_activation_redirect() {
 	// Check PHP Version
 	if ( version_compare( phpversion(), '5.3.3', '<=' ) ) {
-		wp_die( __( "The minimum required version of PHP to run this plugin is PHP Version 5.3.3<br>Please contact your hosting company and ask them to upgrade this site's php verison.", 'rafflepress' ), __( 'Upgrade PHP', 'rafflepress' ), 200 );
+		wp_die( wp_kses( __( "The minimum required version of PHP to run this plugin is PHP Version 5.3.3<br>Please contact your hosting company and ask them to upgrade this site's php verison.", 'rafflepress' ), array( 'br' => array() ) ), esc_html__( 'Upgrade PHP', 'rafflepress' ), 200 );
 	}
 
 	// Bail if no activation redirect

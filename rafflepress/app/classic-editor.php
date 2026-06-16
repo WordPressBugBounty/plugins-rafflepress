@@ -1,4 +1,9 @@
 <?php
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 if ( ! function_exists( 'rafflepress_media_button' ) ) {
 	add_action( 'media_buttons', 'rafflepress_media_button', 15 );
@@ -20,8 +25,8 @@ if ( ! function_exists( 'rafflepress_media_button' ) ) {
 			'<a href="#" class="button rafflepress-insert-giveaway-button" data-editor="%s" title="%s">%s %s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Giveaway', 'rafflepress' ),
-			$icon,
-			__( 'Add Giveaway', 'rafflepress' )
+			$icon, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static, plugin-defined SVG icon markup; contains no dynamic/user data.
+			esc_html__( 'Add Giveaway', 'rafflepress' )
 		);
 
 		// If we have made it this far then load the JS.
@@ -75,7 +80,7 @@ if ( ! function_exists( 'rafflepress_media_button' ) ) {
 					printf( '<p><label for="rafflepress-modal-select-giveaway">%s</label></p>', esc_html__( 'Select a giveaway below to insert', 'rafflepress' ) );
 					echo '<select id="rafflepress-modal-select-giveaway">';
 					foreach ( $giveaways as $giveaway ) {
-						printf( '<option value="%d">%s</option>', $giveaway->id, esc_html( $giveaway->name ) );
+						printf( '<option value="%d">%s</option>', absint( $giveaway->id ), esc_html( $giveaway->name ) );
 					}
 					echo '</select><br>';
 				} else {
@@ -90,7 +95,7 @@ if ( ! function_exists( 'rafflepress_media_button' ) ) {
 								),
 							)
 						),
-						admin_url( 'admin.php?page=rafflepress_lite_add_new' )
+						esc_url( admin_url( 'admin.php?page=rafflepress_lite_add_new' ) )
 					);
 					echo '</p>';
 				}
