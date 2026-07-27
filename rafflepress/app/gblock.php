@@ -49,6 +49,7 @@ if ( ! function_exists( 'rafflepress_enqueue_block_editor_assets' ) ) {
 		$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 		$sql       = "SELECT * FROM $tablename";
 		$sql      .= ' WHERE deleted_at is null';
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$giveaways = $wpdb->get_results( $sql );
 
 		wp_localize_script(

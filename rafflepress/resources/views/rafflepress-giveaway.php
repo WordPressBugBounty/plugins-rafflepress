@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template partial loaded via require_once inside a function (rafflepress_lite_*_page / render / email builder); its top-level variables are function-local, not global.
 // Prevent direct file access
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -64,6 +65,7 @@ if (
 	$tablename2 = $wpdb->prefix . 'rafflepress_entries';
 	$sql        = "SELECT *,(SELECT count(id) FROM $tablename2 WHERE giveaway_id = %d and deleted_at IS NULL) as entries FROM $tablename WHERE id = %d and deleted_at IS NULL";
 	$safe_sql   = $wpdb->prepare( $sql, $rafflepress_id, $rafflepress_id );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$giveaway   = $wpdb->get_row( $safe_sql );
 
 	//$token = get_option('rafflepress_token');
@@ -83,11 +85,13 @@ if ( ! empty( $_GET['confirm'] ) && ! empty( $_GET['id'] ) ) {
 	$tablename  = $wpdb->prefix . 'rafflepress_contestants';
 	$sql        = "SELECT * FROM $tablename WHERE token = %s AND giveaway_id = %d AND id = %d";
 	$safe_sql   = $wpdb->prepare( $sql, $confirm, $rafflepress_id, $id );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$contestant = $wpdb->get_row( $safe_sql );
 
 	// confirm contestant
 	if ( ! empty( $contestant ) ) {
 		$tablename            = $wpdb->prefix . 'rafflepress_contestants';
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$contestant_confirmed = $wpdb->update(
 			$tablename,
 			array(
@@ -114,6 +118,7 @@ if ( ! empty( $_GET['confirm'] ) && ! empty( $_GET['id'] ) ) {
 			$tablename = $wpdb->prefix . 'rafflepress_entries';
 			$sql       = 'UPDATE ' . $tablename . ' SET deleted_at = NULL WHERE referrer_id = %d';
 			$safe_sql  = $wpdb->prepare( $sql, $id );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$result    = $wpdb->query( $safe_sql );
 		}
 	}
@@ -168,6 +173,7 @@ if ( ! empty( $settings->show_winners ) ) {
 	$tablename = $wpdb->prefix . 'rafflepress_contestants';
 	$sql       = "SELECT email,fname,lname FROM $tablename WHERE giveaway_id = %d AND winner = 1";
 	$safe_sql  = $wpdb->prepare( $sql, $giveaway->id );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$winners   = $wpdb->get_results( $safe_sql );
 	foreach ( $winners as $w ) {
 		$w->gravatar = 'https://www.gravatar.com/avatar/' . md5( $w->email ) . '?s=32';
@@ -188,6 +194,7 @@ if ( ! empty( $_GET['iframe'] ) && ! empty( $_GET['parent_url'] ) ) {
 		// ensure domain is correct
 		$home_url = home_url();
 		if ( strpos( $parent_url, $home_url ) !== false ) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$wpdb->update(
 			$tablename,
 			array(
@@ -355,7 +362,7 @@ if ( ! empty( $settings->entry_options ) ) {
 			$v->trustpilot_url = 'https://www.trustpilot.com/review/rafflepress.com';
 		}
 		if ( $v->type == 'tiktok-follow' && empty( $v->tiktok_url ) ) {
-			$v->tiktok_url = 'http://www.tiktok.com/wpbeginner/';
+			$v->tiktok_url = 'https://www.tiktok.com/@wpbeginner';
 		}
 		if ( $v->type == 'whatsapp-follow' && empty( $v->whatsapp_url ) ) {
 			$v->whatsapp_url = 'https://www.whatsapp.com/channel/0029Vb6Dlwj9xVJeUowQ6x0t';

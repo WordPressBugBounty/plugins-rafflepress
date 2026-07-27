@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template partial loaded via require_once inside a function (rafflepress_lite_*_page / render / email builder); its top-level variables are function-local, not global.
 // Prevent direct file access
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,6 +22,7 @@ if ( ! empty( $_GET['rp-debug'] ) ) {
 	$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 	$sql       = "SELECT meta FROM $tablename WHERE id = %d LIMIT 3";
 	$safe_sql  = $wpdb->prepare( $sql, $giveaway_id );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$meta      = $wpdb->get_var( $safe_sql );
 	echo 'rp-debug';
 	var_dump( $meta );
@@ -58,6 +60,7 @@ if ( empty( $giveaway_id ) ) {
 	$tablename2 = $wpdb->prefix . 'rafflepress_entries';
 	$sql        = "SELECT *,(SELECT count(id) FROM $tablename2 WHERE giveaway_id = %d AND deleted_at IS NULL) as entries FROM $tablename WHERE id = %d";
 	$safe_sql   = $wpdb->prepare( $sql, $giveaway_id, $giveaway_id );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$giveaway   = $wpdb->get_row( $safe_sql );
 
 	if ( ! empty( $giveaway->entries ) ) {

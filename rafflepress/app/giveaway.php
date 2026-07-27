@@ -17,6 +17,7 @@ function rafflepress_lite_get_giveaway_list() {
 
 		$sql .= ' WHERE deleted_at is null ORDER BY name asc ';
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$response = $wpdb->get_results( $sql );
 
 		wp_send_json( $response );
@@ -95,6 +96,7 @@ function rafflepress_lite_create_giveaway_handler() {
 	$settings           = wp_json_encode( $settings );
 
 	// Database insert with error handling
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$result = $wpdb->insert(
 		$tablename,
 		array(
@@ -122,6 +124,7 @@ function rafflepress_lite_create_giveaway_handler() {
 	$giveaway_name = esc_html__( 'New Giveaway', 'rafflepress' ) . " (ID #$id)";
 
 	// Update name
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$wpdb->update(
 		$tablename,
 		array( 'name' => $giveaway_name ),
@@ -268,6 +271,7 @@ function rafflepress_lite_giveaway_datatable() {
 			$sql .= ' OFFSET ' . ( $current_page - 1 ) * $per_page;
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$results = $wpdb->get_results( $sql );
 
 		$data = array();
@@ -290,6 +294,7 @@ function rafflepress_lite_giveaway_datatable() {
 							$tablename = $wpdb->prefix . 'rafflepress_contestants';
 							$sql       = "SELECT count(id) FROM $tablename WHERE giveaway_id = %d AND winner = 1";
 							$safe_sql  = $wpdb->prepare( $sql, absint( $v->id ) );
+							// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 							$winners   = $wpdb->get_var( $safe_sql );
 							if ( empty( $winners ) ) {
 								$needs_winners = '|needs_winners';
@@ -441,6 +446,7 @@ function rafflepress_lite_giveaway_get_data_total( $filter = null ) {
 		$sql .= " AND name LIKE '%" . esc_sql( sanitize_text_field( $_GET['s'] ) ) . "%'";
 	}
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results = $wpdb->get_var( $sql );
 	return $results;
 }
@@ -460,6 +466,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 
 	$sql .= ' WHERE 1 = 1 AND deleted_at is null ';
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results      = $wpdb->get_var( $sql );
 	$class        = ( $current == 'all' ? ' class="current"' : '' );
 	$all_url      = remove_query_arg( 'filter' );
@@ -472,6 +479,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 	$sql .= ' AND  UTC_TIMESTAMP() < ends ';
 	$sql .= ' AND  active = 1 ';
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results          = $wpdb->get_var( $sql );
 	$running_url      = add_query_arg( 'filter', 'running' );
 	$class            = ( $current == 'running' ? ' class="current"' : '' );
@@ -483,6 +491,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 	$sql .= ' AND  UTC_TIMESTAMP() < starts ';
 	$sql .= ' AND  active = 1 ';
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results           = $wpdb->get_var( $sql );
 	$upcoming_url      = add_query_arg( 'filter', 'upcoming' );
 	$class             = ( $current == 'upcoming' ? ' class="current"' : '' );
@@ -494,6 +503,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 	$sql .= ' AND  UTC_TIMESTAMP() > ends ';
 	$sql .= ' AND  active = 1 ';
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results        = $wpdb->get_var( $sql );
 	$ended_url      = add_query_arg( 'filter', 'ended' );
 	$class          = ( $current == 'ended' ? ' class="current"' : '' );
@@ -509,6 +519,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 	$sql       .= " AND  giveawaytemplate_id = 'basic_giveaway'";
 	$sql       .= " AND  NOT EXISTS (SELECT 1 FROM $tablename2 WHERE giveaway_id = $tablename.id AND winner = 1)";
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results                = $wpdb->get_var( $sql );
 	$needs_winners_url      = add_query_arg( 'filter', 'needs_winners' );
 	$class                  = ( $current == 'needs_winners' ? ' class="current"' : '' );
@@ -518,6 +529,7 @@ function rafflepress_lite_giveaway_get_views( $filter = null ) {
 	$sql  = "SELECT count(id) FROM $tablename";
 	$sql .= ' WHERE 1 = 1 AND deleted_at is not null ';
 
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	$results           = $wpdb->get_var( $sql );
 	$archived_url      = add_query_arg( 'filter', 'archived' );
 	$class             = ( $current == 'archived' ? ' class="current"' : '' );
@@ -543,9 +555,11 @@ function rafflepress_lite_duplicate_giveaway() {
 		$sql       = "SELECT * FROM $tablename";
 		$sql      .= ' WHERE id = %d';
 		$safe_sql  = $wpdb->prepare( $sql, $id );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$result    = $wpdb->get_row( $safe_sql );
 
 		if ( ! empty( $result ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r = $wpdb->insert(
 				$tablename,
 				array(
@@ -590,6 +604,7 @@ function rafflepress_lite_archive_selected_giveaways() {
 				$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 				$sql       = 'UPDATE ' . $tablename . " SET deleted_at = CURRENT_TIMESTAMP() WHERE id IN ( $format )";
 				$safe_sql  = $wpdb->prepare( $sql, $ids );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 				$result    = $wpdb->query( $safe_sql );
 				if ( $result ) {
 					wp_send_json( array( 'status' => true ) );
@@ -615,6 +630,7 @@ function rafflepress_lite_unarchive_selected_giveaways( $ids ) {
 				$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 				$sql       = 'UPDATE ' . $tablename . " SET deleted_at = NULL WHERE id IN ( $format )";
 				$safe_sql  = $wpdb->prepare( $sql, $ids );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 				$result    = $wpdb->query( $safe_sql );
 				if ( $result ) {
 					wp_send_json( array( 'status' => true ) );
@@ -635,6 +651,7 @@ function rafflepress_lite_delete_archived_giveaways() {
 
 			$sql  = "SELECT id FROM $tablename";
 			$sql .= ' WHERE deleted_at is not null';
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$ids  = $wpdb->get_col( $sql );
 
 			$how_many     = count( $ids );
@@ -644,18 +661,21 @@ function rafflepress_lite_delete_archived_giveaways() {
 			// Delete giveaways
 			$sql      = 'DELETE FROM ' . $tablename . " WHERE id IN ($format )";
 			$safe_sql = $wpdb->prepare( $sql, $ids );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$result   = $wpdb->query( $safe_sql );
 
 			// Deleted contestants
 			$tablename = $wpdb->prefix . 'rafflepress_contestants';
 			$sql       = 'DELETE FROM ' . $tablename . " WHERE giveaway_id IN ($format )";
 			$safe_sql  = $wpdb->prepare( $sql, $ids );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$result    = $wpdb->query( $safe_sql );
 
 			// Delete entries
 			$tablename = $wpdb->prefix . 'rafflepress_entries';
 			$sql       = 'DELETE FROM ' . $tablename . " WHERE giveaway_id IN ($format )";
 			$safe_sql  = $wpdb->prepare( $sql, $ids );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$result    = $wpdb->query( $safe_sql );
 
 			wp_send_json( array( 'status' => true ) );
@@ -679,6 +699,7 @@ function rafflepress_lite_start_giveaway() {
 		$sql       = "SELECT * FROM $tablename";
 		$sql      .= ' WHERE id = %d';
 		$safe_sql  = $wpdb->prepare( $sql, $id );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$result    = $wpdb->get_row( $safe_sql );
 
 		$starts = gmdate( 'Y-m-d H:i:s', time() - 60 );
@@ -687,6 +708,7 @@ function rafflepress_lite_start_giveaway() {
 		$settings->starts = $starts;
 		$settings         = wp_json_encode( $settings );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$r = $wpdb->update(
 			$tablename,
 			array(
@@ -722,6 +744,7 @@ function rafflepress_lite_end_giveaway() {
 		$sql       = "SELECT * FROM $tablename";
 		$sql      .= ' WHERE id = %d';
 		$safe_sql  = $wpdb->prepare( $sql, $id );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$result    = $wpdb->get_row( $safe_sql );
 
 		$ends = gmdate( 'Y-m-d H:i:s', time() - 60 );
@@ -730,6 +753,7 @@ function rafflepress_lite_end_giveaway() {
 		$settings->ends = $ends;
 		$settings       = wp_json_encode( $settings );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$r = $wpdb->update(
 			$tablename,
 			array(
@@ -767,6 +791,7 @@ function rafflepress_lite_enable_disable_giveaway() {
 		// Get the giveaway of the id passed in.
 		global $wpdb;
 		$tablename = $wpdb->prefix . 'rafflepress_giveaways';
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$r         = $wpdb->update(
 			$tablename,
 			array(
@@ -818,6 +843,7 @@ function rafflepress_lite_save_slug() {
 		// see if a slug exists for this giveaway
 		$sql             = "SELECT slug FROM $tablename WHERE id = %d";
 		$safe_sql        = $wpdb->prepare( $sql, absint( $_POST['giveaway_id'] ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$this_slug_exist = $wpdb->get_var( $safe_sql );
 		if ( ! empty( $giveaway_slug ) ) {
 			if ( empty( $this_slug_exist ) || $this_slug_exist != $giveaway_slug ) {
@@ -825,6 +851,7 @@ function rafflepress_lite_save_slug() {
 				// check if slug exists first
 				$sql        = "SELECT * FROM $tablename WHERE slug = %s";
 				$safe_sql   = $wpdb->prepare( $sql, $giveaway_slug );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 				$slug_exist = $wpdb->get_row( $safe_sql );
 
 				if ( ! empty( $slug_exist ) ) {
@@ -840,6 +867,7 @@ function rafflepress_lite_save_slug() {
 					$tableposts      = $wpdb->prefix . 'posts';
 					$sql             = "SELECT * FROM $tableposts WHERE post_name = %s";
 					$safe_sql        = $wpdb->prepare( $sql, $giveaway_slug );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 					$post_slug_exist = $wpdb->get_row( $safe_sql );
 
 					if ( ! empty( $post_slug_exist ) ) {
@@ -857,6 +885,7 @@ function rafflepress_lite_save_slug() {
 		if ( ! empty( $_POST['giveaway_id'] ) ) {
 			$giveaway_id = absint( $_POST['giveaway_id'] );
 			// Update
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r      = $wpdb->update(
 				$tablename,
 				array(
@@ -996,6 +1025,7 @@ function rafflepress_lite_save_giveaway() {
 		if ( empty( $_POST['giveaway_id'] ) ) {
 
 			// Insert
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r           = $wpdb->insert(
 				$tablename,
 				array(
@@ -1018,6 +1048,7 @@ function rafflepress_lite_save_giveaway() {
 			// see if a slug exists for this giveaway
 			$sql             = "SELECT slug FROM $tablename WHERE id = %d";
 			$safe_sql        = $wpdb->prepare( $sql, $giveaway_id );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$this_slug_exist = $wpdb->get_var( $safe_sql );
 			if ( ! empty( $giveaway_slug ) ) {
 				if ( empty( $this_slug_exist ) || $this_slug_exist != $giveaway_slug ) {
@@ -1025,6 +1056,7 @@ function rafflepress_lite_save_giveaway() {
 					// check if slug exists first
 					$sql        = "SELECT * FROM $tablename WHERE slug = %s AND id != %d";
 					$safe_sql   = $wpdb->prepare( $sql, $giveaway_slug, $giveaway_id );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 					$slug_exist = $wpdb->get_row( $safe_sql );
 
 					if ( ! empty( $slug_exist ) ) {
@@ -1040,6 +1072,7 @@ function rafflepress_lite_save_giveaway() {
 					$tableposts      = $wpdb->prefix . 'posts';
 					$sql             = "SELECT * FROM $tableposts WHERE post_name = %s";
 					$safe_sql        = $wpdb->prepare( $sql, $giveaway_slug );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 					$post_slug_exist = $wpdb->get_row( $safe_sql );
 
 					if ( ! empty( $post_slug_exist ) ) {
@@ -1053,6 +1086,7 @@ function rafflepress_lite_save_giveaway() {
 				}
 			}
 			// Update
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r      = $wpdb->update(
 				$tablename,
 				array(
@@ -1162,6 +1196,7 @@ function rafflepress_lite_save_template() {
 			}
 
 			// Insert
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r = $wpdb->insert(
 				$tablename,
 				array(
@@ -1188,6 +1223,7 @@ function rafflepress_lite_save_template() {
 				$tablename = $wpdb->prefix . 'rafflepress_giveaways';
 				$sql       = "SELECT * FROM $tablename WHERE id = %d";
 				$safe_sql  = $wpdb->prepare( $sql, $giveaway_id );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 				$giveaway  = $wpdb->get_row( $safe_sql );
 
 				$status = 'inserted';
@@ -1206,6 +1242,7 @@ function rafflepress_lite_save_template() {
 			$giveaway_id = absint( $_POST['giveaway']['id'] );
 
 			// Update
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$r = $wpdb->update(
 				$tablename,
 				array(

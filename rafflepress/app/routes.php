@@ -171,8 +171,8 @@ function rafflepress_lite_create_menus() {
 			'rafflepress_lite_get_pro_page'
 		);
 		// add upgrade link color and blank target
-		add_action( 'admin_footer', 'seedprod_pro_upgrade_link_class' );
-		function seedprod_pro_upgrade_link_class() {
+		add_action( 'admin_footer', 'rafflepress_lite_upgrade_link_class' );
+		function rafflepress_lite_upgrade_link_class() {
 			echo "<script>jQuery(function($) { $('#rp-lite-admin-menu__upgrade').parent().attr('target','_blank'); $('#rp-lite-admin-menu__upgrade').parent().parent().addClass('rp-lite-admin-menu__upgrade_wrapper')});</script>";
 		}
 

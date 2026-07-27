@@ -1,4 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { exit; } // Prevent direct file access ?>
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template partial loaded via require_once inside a function (rafflepress_lite_*_page / render / email builder); its top-level variables are function-local, not global. ?>
 <?php // phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Standalone email template sent via wp_mail(); CSS must be inline because emails have no wp_enqueue/wp_head pipeline. ?>
 <!DOCTYPE html>
 <html>

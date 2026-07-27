@@ -75,6 +75,7 @@ if ( ! function_exists( 'rafflepress_media_button' ) ) {
 				$sql .= ' WHERE deleted_at is null ORDER BY name asc ';
 				//$safe_sql = $wpdb->prepare($sql);
 				//var_dump($sql);
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 				$giveaways = $wpdb->get_results( $sql );
 				if ( ! empty( $giveaways ) ) {
 					printf( '<p><label for="rafflepress-modal-select-giveaway">%s</label></p>', esc_html__( 'Select a giveaway below to insert', 'rafflepress' ) );

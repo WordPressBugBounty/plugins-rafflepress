@@ -659,6 +659,7 @@ function rafflepress_lite_wp_insert_rows( $row_arrays = array(), $wp_table_name 
 	}
 
 	$sql = $wpdb->prepare( $query, $values );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 	if ( $wpdb->query( $sql ) ) {
 		return true;
 	} else {

@@ -24,6 +24,7 @@ function rafflepress_lite_standalone_redirect() {
 		if ( ! empty( $path ) ) {
 			$sql         = "SELECT id FROM $tablename WHERE slug = %s";
 			$safe_sql    = $wpdb->prepare( $sql, $path );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 			$giveaway_id = $wpdb->get_var( $safe_sql );
 
 			if ( ! empty( $giveaway_id ) ) {
