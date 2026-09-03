@@ -152,5 +152,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'txt_124' => __( "What's your WhatsApp number?", 'rafflepress' ),
 		'txt_125' => __( 'Follow us on WhatsApp', 'rafflepress' ),
 		'txt_126' => __( 'Please Enter Your WhatsApp Phone number.', 'rafflepress' ),
+		'txt_127' => __( 'Share on Facebook', 'rafflepress' ),
+		'txt_128' => __( 'Share on X ( Twitter )', 'rafflepress' ),
+		'txt_129' => __( 'Share on Pinterest', 'rafflepress' ),
+		'txt_130' => __( 'Share on LinkedIn', 'rafflepress' ),
+		'txt_131' => __( 'Share by email', 'rafflepress' ),
+		'txt_132' => __( 'Copy referral link', 'rafflepress' ),
+		'txt_133' => __( 'Previous prize', 'rafflepress' ),
+		'txt_134' => __( 'Next prize', 'rafflepress' ),
+		'txt_135' => __( 'Your answer', 'rafflepress' ),
+		'txt_136' => __( 'Choose an image to upload', 'rafflepress' ),
+		'txt_137' => __( 'Copied!', 'rafflepress' ),
 	);
 

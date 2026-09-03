@@ -947,6 +947,48 @@ function rafflepress_lite_save_giveaway() {
 
 		$_POST = stripslashes_deep( $_POST );
 
+		/*
+		 * The builder posts settings as one JSON string rather than as nested form
+		 * fields. Nested fields cost one PHP input variable per leaf, so a giveaway
+		 * with many entry options exceeded max_input_vars (1000 by default) and PHP
+		 * silently discarded the overflow, saving a truncated giveaway. PHP applies that
+		 * cutoff while parsing the request, before this function runs, so the fix is the
+		 * builder sending one variable. This decode only restores the nested array that
+		 * the rest of this function expects.
+		 *
+		 * A nested array is still accepted so an older cached builder bundle keeps working.
+		 */
+		if ( isset( $_POST['settings'] ) && is_string( $_POST['settings'] ) ) {
+			$decoded_settings = json_decode( $_POST['settings'], true );
+
+			if ( ! is_array( $decoded_settings ) ) {
+				wp_send_json(
+					array( 'msg' => __( 'The giveaway settings could not be read. Please reload the page and save again.', 'rafflepress' ) ),
+					400
+				);
+			}
+
+			$_POST['settings'] = $decoded_settings;
+		}
+
+		/*
+		 * Validate the shape before anything reads it, whichever path it arrived by.
+		 * The lines below index these keys directly, so a payload without them used to
+		 * emit warnings and collapse both dates to "now", and a missing settings key
+		 * fataled in array_walk_recursive. An empty array also passed a bare is_array
+		 * check, which overwrote a configured giveaway with nothing and still answered
+		 * "updated".
+		 */
+		$required_settings = array( 'timezone', 'starts', 'ends', 'starts_time', 'ends_time' );
+
+		if ( ! isset( $_POST['settings'] ) || ! is_array( $_POST['settings'] )
+			|| array_diff( $required_settings, array_keys( $_POST['settings'] ) ) ) {
+			wp_send_json(
+				array( 'msg' => __( 'The giveaway settings were incomplete, so nothing was saved. Please reload the page and try again.', 'rafflepress' ) ),
+				400
+			);
+		}
+
 		$timezone    = sanitize_text_field( $_POST['settings']['timezone'] );
 		$starts      = sanitize_text_field( $_POST['settings']['starts'] );
 		$ends        = sanitize_text_field( $_POST['settings']['ends'] );

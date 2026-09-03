@@ -826,7 +826,6 @@ p{font-size:13px;line-height:1.5;margin:1em 0}
 #rafflepress-giveaway-entries p>strong{font-size:16px;color:#2d2d2d}
 #rafflepress-giveaway-entries p{margin-bottom:11px}
 #rafflepress-giveaway-entries{border-bottom:1px solid #f2f2f2;padding:11px 0 0 0;color:#2d2d2d}
-#rafflepress-giveaway-entries .btn{outline:0}
 #rafflepress-giveaway-entries .btn-action{font-size:16px;font-weight:normal;position:relative;padding-top:20px;padding-bottom:20px;padding-left:74px;color:#707070;text-align:left;overflow:hidden;text-overflow:ellipsis;padding-right:60px}
 #rafflepress-giveaway-footer{padding:15px 20px;font-size:11px}
 #rafflepress-giveaway-footer a{color:#9c9c9c !important}
@@ -992,6 +991,40 @@ p{font-size:13px;line-height:1.5;margin:1em 0}
 #rafflepress-recaptcha .grecaptcha-badge{margin:auto}
 .v-facebook-login{padding:.53rem 25px !important;margin:auto !important}
 .fb-login-txt{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.rafflepress-giveaway .rafflepress-type-tweet .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-twitter-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-tiktok-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-tiktok-videos .rafflepress-action .form-control:focus{border-color:#000}
+.rafflepress-giveaway .rafflepress-type-tweet .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-twitter-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-tiktok-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-tiktok-videos .rafflepress-action .form-control:focus-visible{outline-color:#000}
+.rafflepress-giveaway .rafflepress-type-facebook-share .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-facebook-like-share .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-fb-page-post .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-visit-fb .rafflepress-action .form-control:focus{border-color:#4267b2}
+.rafflepress-giveaway .rafflepress-type-facebook-share .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-facebook-like-share .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-fb-page-post .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-visit-fb .rafflepress-action .form-control:focus-visible{outline-color:#4267b2}
+.rafflepress-giveaway .rafflepress-type-linkedin-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-linkedin-share .rafflepress-action .form-control:focus{border-color:#2867b2}
+.rafflepress-giveaway .rafflepress-type-linkedin-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-linkedin-share .rafflepress-action .form-control:focus-visible{outline-color:#2867b2}
+.rafflepress-giveaway .rafflepress-type-instagram-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-instagram-page-post .rafflepress-action .form-control:focus{border-color:#f55f3f}
+.rafflepress-giveaway .rafflepress-type-instagram-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-instagram-page-post .rafflepress-action .form-control:focus-visible{outline-color:#f55f3f}
+.rafflepress-giveaway .rafflepress-type-youtube-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-watch-a-video .rafflepress-action .form-control:focus{border-color:red}
+.rafflepress-giveaway .rafflepress-type-youtube-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-watch-a-video .rafflepress-action .form-control:focus-visible{outline-color:red}
+.rafflepress-giveaway .rafflepress-type-blogpost .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-comment .rafflepress-action .form-control:focus{border-color:#0073aa}
+.rafflepress-giveaway .rafflepress-type-blogpost .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-comment .rafflepress-action .form-control:focus-visible{outline-color:#0073aa}
+.rafflepress-giveaway .rafflepress-type-invent-your-own .rafflepress-action .form-control:focus{border-color:#0f0f0f}
+.rafflepress-giveaway .rafflepress-type-invent-your-own .rafflepress-action .form-control:focus-visible{outline-color:#0f0f0f}
+.rafflepress-giveaway .rafflepress-type-pinterest-follow .rafflepress-action .form-control:focus{border-color:#e60023}
+.rafflepress-giveaway .rafflepress-type-pinterest-follow .rafflepress-action .form-control:focus-visible{outline-color:#e60023}
+.rafflepress-giveaway .rafflepress-type-podcast .rafflepress-action .form-control:focus{border-color:#8d33c6}
+.rafflepress-giveaway .rafflepress-type-podcast .rafflepress-action .form-control:focus-visible{outline-color:#8d33c6}
+.rafflepress-giveaway .rafflepress-type-polls-surveys .rafflepress-action .form-control:focus{border-color:#e91e63}
+.rafflepress-giveaway .rafflepress-type-polls-surveys .rafflepress-action .form-control:focus-visible{outline-color:#e91e63}
+.rafflepress-giveaway .rafflepress-type-question .rafflepress-action .form-control:focus{border-color:#90b}
+.rafflepress-giveaway .rafflepress-type-question .rafflepress-action .form-control:focus-visible{outline-color:#90b}
+.rafflepress-giveaway .rafflepress-type-refer-a-friend .rafflepress-action .form-control:focus{border-color:#e42e2f}
+.rafflepress-giveaway .rafflepress-type-refer-a-friend .rafflepress-action .form-control:focus-visible{outline-color:#e42e2f}
+.rafflepress-giveaway .rafflepress-type-submit-image .rafflepress-action .form-control:focus{border-color:#009688}
+.rafflepress-giveaway .rafflepress-type-submit-image .rafflepress-action .form-control:focus-visible{outline-color:#009688}
+.rafflepress-giveaway .rafflepress-type-trustpilot-follow .rafflepress-action .form-control:focus{border-color:#1c1c1c}
+.rafflepress-giveaway .rafflepress-type-trustpilot-follow .rafflepress-action .form-control:focus-visible{outline-color:#1c1c1c}
+.rafflepress-giveaway .rafflepress-type-twitch-follow .rafflepress-action .form-control:focus{border-color:#9147ff}
+.rafflepress-giveaway .rafflepress-type-twitch-follow .rafflepress-action .form-control:focus-visible{outline-color:#9147ff}
+.rafflepress-giveaway .rafflepress-type-visit-a-page .rafflepress-action .form-control:focus{border-color:#0000ba}
+.rafflepress-giveaway .rafflepress-type-visit-a-page .rafflepress-action .form-control:focus-visible{outline-color:#0000ba}
+.rafflepress-giveaway .rafflepress-type-automatic-entry .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-capterra-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-g2-follow .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-join-newsletter .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-rss .rafflepress-action .form-control:focus,.rafflepress-giveaway .rafflepress-type-whatsapp-follow .rafflepress-action .form-control:focus{border-color:#767676}
+.rafflepress-giveaway .rafflepress-type-automatic-entry .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-capterra-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-g2-follow .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-join-newsletter .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-rss .rafflepress-action .form-control:focus-visible,.rafflepress-giveaway .rafflepress-type-whatsapp-follow .rafflepress-action .form-control:focus-visible{outline-color:#767676}
 @media screen and (-webkit-min-device-pixel-ratio:0){.rafflepress-giveaway input[type="date"].form-control,.rafflepress-giveaway input[type="time"].form-control,.rafflepress-giveaway input[type="datetime-local"].form-control,.rafflepress-giveaway input[type="month"].form-control{line-height:34px}
 .rafflepress-giveaway input[type="date"].input-sm,.rafflepress-giveaway input[type="time"].input-sm,.rafflepress-giveaway input[type="datetime-local"].input-sm,.rafflepress-giveaway input[type="month"].input-sm,.input-group-sm .rafflepress-giveaway input[type="date"],.input-group-sm .rafflepress-giveaway input[type="time"],.input-group-sm .rafflepress-giveaway input[type="datetime-local"],.input-group-sm .rafflepress-giveaway input[type="month"]{line-height:30px}
 .rafflepress-giveaway input[type="date"].input-lg,.rafflepress-giveaway input[type="time"].input-lg,.rafflepress-giveaway input[type="datetime-local"].input-lg,.rafflepress-giveaway input[type="month"].input-lg,.input-group-lg .rafflepress-giveaway input[type="date"],.input-group-lg .rafflepress-giveaway input[type="time"],.input-group-lg .rafflepress-giveaway input[type="datetime-local"],.input-group-lg .rafflepress-giveaway input[type="month"]{line-height:46px}

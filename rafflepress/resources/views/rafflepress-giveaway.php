@@ -22,12 +22,20 @@ if ( ! empty( $_GET['rafflepress-preview'] ) ) {
 }
 	//bail if user not logged in
 if ( ! is_user_logged_in() && $is_preview ) {
-	wp_die( 'You must be logged in to view this page.' );
+	wp_die(
+		esc_html__( 'You must be logged in to view this page.', 'rafflepress' ),
+		esc_html__( 'Authentication Required', 'rafflepress' ),
+		array( 'response' => 401 )
+	);
 }
 
 // bail if user logged in, is preview and not admin
 if ( is_user_logged_in() && $is_preview && ! current_user_can( apply_filters( 'rafflepress_manage_options_capability', 'manage_options' ) ) ) {
-	wp_die( 'You must be logged in as an admin to view this page.' );
+	wp_die(
+		esc_html__( 'You must be logged in as an admin to view this page.', 'rafflepress' ),
+		esc_html__( 'Insufficient Permissions', 'rafflepress' ),
+		array( 'response' => 403 )
+	);
 }
 
 // check for iframe
@@ -419,7 +427,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	//header("Location: $url");
 	?>
 			<!DOCTYPE html>
-			<html>
+			<html <?php language_attributes(); ?>>
 			<head>
 			<!-- Open Graph -->
 			<meta property="og:url" content="<?php echo esc_url( $ref_url ); ?>" />
@@ -471,7 +479,7 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en" class="rafflepress-giveaway">
+<html <?php language_attributes(); ?> class="rafflepress-giveaway">
 
 <head>
 	<meta charset="utf-8">
@@ -636,7 +644,6 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
                 .lightordark (@btncolor);
                 background-color: darken(@background, 10%);
                 border-color: darken(@border, 25%);
-                outline: none;
             }
 
             &:hover {
@@ -700,9 +707,20 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
             .button-variant(@btnColor, @btnColor, @btnColor)
         }
 
+        .rafflepress-giveaway #rafflepress-giveaway-entries .btn:focus-visible,
+        .rafflepress-giveaway .btn-primary:focus-visible {
+            outline: 2px solid @btnColor;
+            outline-offset: 2px;
+        }
+
         .rafflepress-giveaway .form-control:focus {
             border-color: $settings->button_color;
             box-shadow: none;
+        }
+
+        .rafflepress-giveaway .form-control:focus-visible {
+            outline: 2px solid @btnColor;
+            outline-offset: 2px;
         }
 
         .fa-spinner {

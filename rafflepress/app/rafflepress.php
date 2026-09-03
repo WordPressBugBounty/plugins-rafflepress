@@ -868,10 +868,15 @@ function rafflepress_lite_display_shortcode( $atts ) {
 
 	// Get Giveaway
 	$tablename = $wpdb->prefix . 'rafflepress_giveaways';
-	$sql       = "SELECT active FROM $tablename WHERE id = %d";
+	$sql       = "SELECT active, name FROM $tablename WHERE id = %d";
 	$safe_sql  = $wpdb->prepare( $sql, $id );
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
-	$active    = $wpdb->get_var( $safe_sql );
+	$giveaway  = $wpdb->get_row( $safe_sql );
+	$active    = ! empty( $giveaway ) ? $giveaway->active : '';
+
+	$iframe_title = ! empty( $giveaway->name )
+		? $giveaway->name
+		: __( 'Giveaway', 'rafflepress' );
 
 	$ref = '';
 	if ( ! empty( $_GET['rpr'] ) ) {
@@ -925,13 +930,14 @@ function rafflepress_getParameterByName(name, url) {
 	  if (!results[2]) return "";
 	  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-function insertIframe( ID, src, minHeight) {
+function insertIframe( ID, src, minHeight, title) {
 	var wrapperID = 'rafflepress-giveaway-iframe-wrapper-'+ID;
 	var iframe = document.createElement('iframe');
 
 	iframe.setAttribute('id', 'rafflepress-'+ID);
 	iframe.setAttribute('class', 'rafflepress-iframe');
 	iframe.setAttribute('src', src);
+	iframe.setAttribute('title', title);
 	iframe.setAttribute('frameborder', '0');
 	iframe.setAttribute('scrolling', 'no');
 	iframe.setAttribute('allowtransparency', 'true');
@@ -944,7 +950,7 @@ function insertIframe( ID, src, minHeight) {
 }
 
 // phpcs:disable
-insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>&rp-email='+rafflepress_getParameterByName('rp-email',location.href)+'&rp-name='+rafflepress_getParameterByName('rp-name',location.href),'<?php echo esc_html( $a['min_height'] ); ?>' );
+insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>&rp-email='+rafflepress_getParameterByName('rp-email',location.href)+'&rp-name='+rafflepress_getParameterByName('rp-name',location.href),'<?php echo esc_html( $a['min_height'] ); ?>',<?php echo wp_json_encode( $iframe_title ); ?> );
 // phpcs:enable
 </script>
 
@@ -1024,10 +1030,15 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 
 	// Get Giveaway
 	$tablename = $wpdb->prefix . 'rafflepress_giveaways';
-	$sql       = "SELECT active FROM $tablename WHERE id = %d";
+	$sql       = "SELECT active, name FROM $tablename WHERE id = %d";
 	$safe_sql  = $wpdb->prepare( $sql, $id );
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
-	$active    = $wpdb->get_var( $safe_sql );
+	$giveaway  = $wpdb->get_row( $safe_sql );
+	$active    = ! empty( $giveaway ) ? $giveaway->active : '';
+
+	$iframe_title = ! empty( $giveaway->name )
+		? $giveaway->name
+		: __( 'Giveaway', 'rafflepress' );
 
 	$ref = '';
 	if ( ! empty( $_GET['rpr'] ) ) {
@@ -1073,6 +1084,7 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 		$is_gb_editor = defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_REQUEST['context'] ) && 'edit' === $_REQUEST['context'];
 	if ( $is_gb_editor ) {
 		$iframe = '<iframe id="rafflepress-' . absint( $iframe_uid ) . '" ' .
+			'title="' . esc_attr( $iframe_title ) . '" ' .
 			'src="' . esc_url( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode( $id ) . '&iframe=1&giframe=' . urlencode( $a['giframe'] ) .
 			'&rpr=' . urlencode( $ref ) . '&parent_url=' . urlencode( $parent_url ) . '&' . absint( wp_rand( 1, 99999 ) ) ) . '" ' .
 			'frameborder="0" scrolling="no" allowtransparency="true" ' . $style . ' ' .
@@ -1083,6 +1095,7 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 			array(
 				'iframe' => array(
 					'id'               => array(),
+					'title'            => array(),
 					'src'              => array(),
 					'frameborder'      => array(),
 					'scrolling'        => array(),
@@ -1099,13 +1112,14 @@ function rafflepress_lite_display_gutenberg_shortcode( $atts ) {
 
 
 <script>
-function insertIframe( ID, src, minHeight) {
+function insertIframe( ID, src, minHeight, title) {
 	var wrapperID = 'rafflepress-giveaway-iframe-wrapper-'+ID;
 	var iframe = document.createElement('iframe');
 
 	iframe.setAttribute('id', 'rafflepress-'+ID);
 	iframe.setAttribute('class', 'rafflepress-iframe');
 	iframe.setAttribute('src', src);
+	iframe.setAttribute('title', title);
 	iframe.setAttribute('frameborder', '0');
 	iframe.setAttribute('scrolling', 'no');
 	iframe.setAttribute('allowtransparency', 'true');
@@ -1118,7 +1132,7 @@ function insertIframe( ID, src, minHeight) {
 }
 
 // phpcs:disable
-insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>','<?php echo esc_html( $a['min_height'] ); ?>' );
+insertIframe( '<?php echo absint( $iframe_uid ); ?>','<?php echo esc_url_raw( trailingslashit( home_url() ) . '?rafflepress_page=rafflepress_render&rafflepress_id=' . urlencode($id) . '&iframe=1&giframe=' . urlencode($a['giframe']) . '&rpr=' . urlencode($ref) . '&parent_url=' . urlencode( $parent_url ) ); ?>&<?php echo absint( wp_rand( 1, 99999 ) ); ?>','<?php echo esc_html( $a['min_height'] ); ?>',<?php echo wp_json_encode( $iframe_title ); ?> );
 // phpcs:enable
 </script>
 

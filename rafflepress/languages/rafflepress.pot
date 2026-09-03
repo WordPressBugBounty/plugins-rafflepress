@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: SeedProd <support@seedprod.com>\n"
 "Last-Translator: John Turner <john@seedprod.com>\n"
-"POT-Creation-Date: 2026-07-27 13:21+0000\n"
+"POT-Creation-Date: 2026-09-03 08:21+0000\n"
 "Report-Msgid-Bugs-To: https://seedprod.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -72,171 +72,171 @@ msgstr ""
 msgid "Signed Up: "
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:65, build/rafflepress/resources/views/backend-translations.php:245
+#: build/rafflepress/app/functions-utils.php:68, build/rafflepress/resources/views/backend-translations.php:245
 msgid "Visit us on Facebook"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:70, build/rafflepress/resources/views/backend-translations.php:682
+#: build/rafflepress/app/functions-utils.php:73, build/rafflepress/resources/views/backend-translations.php:682
 msgid "Like our Page"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:76, build/rafflepress/resources/views/backend-translations.php:242
+#: build/rafflepress/app/functions-utils.php:79, build/rafflepress/resources/views/backend-translations.php:242
 msgid "Follow us on X ( Twitter )"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:81, build/rafflepress/resources/views/backend-translations.php:198, build/rafflepress/resources/views/frontend-translations.php:76
+#: build/rafflepress/app/functions-utils.php:84, build/rafflepress/resources/views/backend-translations.php:198, build/rafflepress/resources/views/frontend-translations.php:76
 msgid "Visit us on Instagram"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:86, build/rafflepress/resources/views/backend-translations.php:203
+#: build/rafflepress/app/functions-utils.php:89, build/rafflepress/resources/views/backend-translations.php:203
 msgid "Invent Your Own"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:91, build/rafflepress/resources/views/backend-translations.php:210
+#: build/rafflepress/app/functions-utils.php:94, build/rafflepress/resources/views/backend-translations.php:210
 msgid "Join an Email Newsletter"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:96, build/rafflepress/resources/views/backend-translations.php:218
+#: build/rafflepress/app/functions-utils.php:99, build/rafflepress/resources/views/backend-translations.php:218
 msgid "Answer a Question"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:101, build/rafflepress/resources/views/backend-translations.php:605
+#: build/rafflepress/app/functions-utils.php:104, build/rafflepress/resources/views/backend-translations.php:605
 msgid "Submit an Image"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:106
+#: build/rafflepress/app/functions-utils.php:109
 msgid "Refer a Friend - Viral"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:111, build/rafflepress/resources/views/backend-translations.php:248
+#: build/rafflepress/app/functions-utils.php:114, build/rafflepress/resources/views/backend-translations.php:248
 msgid "Visit a YouTube Channel"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:116, build/rafflepress/resources/views/backend-translations.php:247
+#: build/rafflepress/app/functions-utils.php:119, build/rafflepress/resources/views/backend-translations.php:247
 msgid "Watch a Video"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:121, build/rafflepress/resources/views/backend-translations.php:709, build/rafflepress/resources/views/backend-translations.php:712, build/rafflepress/resources/views/frontend-translations.php:138
+#: build/rafflepress/app/functions-utils.php:124, build/rafflepress/resources/views/backend-translations.php:709, build/rafflepress/resources/views/backend-translations.php:712, build/rafflepress/resources/views/frontend-translations.php:138
 msgid "Follow us on TikTok"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:126, build/rafflepress/resources/views/backend-translations.php:810, build/rafflepress/resources/views/frontend-translations.php:153
+#: build/rafflepress/app/functions-utils.php:129, build/rafflepress/resources/views/backend-translations.php:810, build/rafflepress/resources/views/frontend-translations.php:153
 msgid "Follow us on WhatsApp"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:131, build/rafflepress/app/functions-utils.php:160, build/rafflepress/resources/views/backend-translations.php:710
+#: build/rafflepress/app/functions-utils.php:134, build/rafflepress/app/functions-utils.php:163, build/rafflepress/resources/views/backend-translations.php:710
 msgid "View TikTok Post / Video"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:136, build/rafflepress/resources/views/backend-translations.php:216, build/rafflepress/resources/views/frontend-translations.php:78
+#: build/rafflepress/app/functions-utils.php:139, build/rafflepress/resources/views/backend-translations.php:216, build/rafflepress/resources/views/frontend-translations.php:78
 msgid "Follow us on Pinterest"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:141, build/rafflepress/resources/views/backend-translations.php:667, build/rafflepress/resources/views/frontend-translations.php:113
+#: build/rafflepress/app/functions-utils.php:144, build/rafflepress/resources/views/backend-translations.php:667, build/rafflepress/resources/views/frontend-translations.php:113
 msgid "Follow us on LinkedIn"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:147, build/rafflepress/resources/views/backend-translations.php:687, build/rafflepress/resources/views/frontend-translations.php:133
+#: build/rafflepress/app/functions-utils.php:150, build/rafflepress/resources/views/backend-translations.php:687, build/rafflepress/resources/views/frontend-translations.php:133
 msgid "Follow us on Twitch"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:155, build/rafflepress/resources/views/backend-translations.php:186
+#: build/rafflepress/app/functions-utils.php:158, build/rafflepress/resources/views/backend-translations.php:186
 msgid "View Facebook Post / Video"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:165, build/rafflepress/resources/views/backend-translations.php:201
+#: build/rafflepress/app/functions-utils.php:168, build/rafflepress/resources/views/backend-translations.php:201
 msgid "View Instagram Post / Video"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:170, build/rafflepress/resources/views/backend-translations.php:522
+#: build/rafflepress/app/functions-utils.php:173, build/rafflepress/resources/views/backend-translations.php:522
 msgid "Automatic Entry"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:175, build/rafflepress/resources/views/backend-translations.php:804, build/rafflepress/resources/views/frontend-translations.php:139
+#: build/rafflepress/app/functions-utils.php:178, build/rafflepress/resources/views/backend-translations.php:804, build/rafflepress/resources/views/frontend-translations.php:139
 msgid "Visit us on G2"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:180, build/rafflepress/resources/views/backend-translations.php:805, build/rafflepress/resources/views/frontend-translations.php:140
+#: build/rafflepress/app/functions-utils.php:183, build/rafflepress/resources/views/backend-translations.php:805, build/rafflepress/resources/views/frontend-translations.php:140
 msgid "Visit us on Capterra"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:185, build/rafflepress/resources/views/backend-translations.php:806, build/rafflepress/resources/views/frontend-translations.php:141
+#: build/rafflepress/app/functions-utils.php:188, build/rafflepress/resources/views/backend-translations.php:806, build/rafflepress/resources/views/frontend-translations.php:141
 msgid "Visit us on Trustpilot"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:190, build/rafflepress/resources/views/backend-translations.php:235
+#: build/rafflepress/app/functions-utils.php:193, build/rafflepress/resources/views/backend-translations.php:235
 msgid "Tweet a Message"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:195, build/rafflepress/resources/views/backend-translations.php:683
+#: build/rafflepress/app/functions-utils.php:198, build/rafflepress/resources/views/backend-translations.php:683, build/rafflepress/resources/views/frontend-translations.php:155
 msgid "Share on Facebook"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:200, build/rafflepress/resources/views/backend-translations.php:244
+#: build/rafflepress/app/functions-utils.php:203, build/rafflepress/resources/views/backend-translations.php:244
 msgid "Visit a Page"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:205, build/rafflepress/resources/views/backend-translations.php:668
+#: build/rafflepress/app/functions-utils.php:208, build/rafflepress/resources/views/backend-translations.php:668, build/rafflepress/resources/views/frontend-translations.php:158
 msgid "Share on LinkedIn"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:211
+#: build/rafflepress/app/functions-utils.php:214
 msgid "Polls & Surveys"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:216, build/rafflepress/resources/views/backend-translations.php:670
+#: build/rafflepress/app/functions-utils.php:219, build/rafflepress/resources/views/backend-translations.php:670
 msgid "Leave a Comment"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:221, build/rafflepress/resources/views/backend-translations.php:673
+#: build/rafflepress/app/functions-utils.php:224, build/rafflepress/resources/views/backend-translations.php:673
 msgid "Write a Blog Post"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:226, build/rafflepress/resources/views/backend-translations.php:676
+#: build/rafflepress/app/functions-utils.php:229, build/rafflepress/resources/views/backend-translations.php:676
 msgid "Subscribe to RSS Feed"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:231, build/rafflepress/resources/views/backend-translations.php:684, build/rafflepress/resources/views/frontend-translations.php:130
+#: build/rafflepress/app/functions-utils.php:234, build/rafflepress/resources/views/backend-translations.php:684, build/rafflepress/resources/views/frontend-translations.php:130
 msgid "Subscribe to Podcast"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:267, build/rafflepress/resources/views/backend-translations.php:465
+#: build/rafflepress/app/functions-utils.php:270, build/rafflepress/resources/views/backend-translations.php:465
 msgid "Select Time"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:824
+#: build/rafflepress/app/functions-utils.php:827
 msgid "Addon deactivated."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:822
+#: build/rafflepress/app/functions-utils.php:825
 msgid "Plugin deactivated."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:828
+#: build/rafflepress/app/functions-utils.php:831
 msgid "Could not deactivate the addon. Please deactivate from the Plugins page."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:858
+#: build/rafflepress/app/functions-utils.php:861
 msgid "Addon activated."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:856
+#: build/rafflepress/app/functions-utils.php:859
 msgid "Plugin activated."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:863
+#: build/rafflepress/app/functions-utils.php:866
 msgid "Could not activate addon. Please activate from the Plugins page."
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:925, build/rafflepress/app/giveaway.php:1300
+#: build/rafflepress/app/functions-utils.php:928, build/rafflepress/app/giveaway.php:1342
 msgid "Not Installed"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:919, build/rafflepress/app/giveaway.php:1294
+#: build/rafflepress/app/functions-utils.php:922, build/rafflepress/app/giveaway.php:1336
 msgid "Inactive"
 msgstr ""
 
-#: build/rafflepress/app/functions-utils.php:914, build/rafflepress/app/giveaway.php:1289
+#: build/rafflepress/app/functions-utils.php:917, build/rafflepress/app/giveaway.php:1331
 msgid "Active"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Giveaway Settings"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:37
+#: build/rafflepress/app/gblock.php:37, build/rafflepress/app/rafflepress.php:879, build/rafflepress/app/rafflepress.php:1041
 msgid "Giveaway"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "RafflePress Giveaway Preview"
 msgstr ""
 
-#: build/rafflepress/app/gblock.php:132, build/rafflepress/resources/views/rafflepress-giveaway.php:802
+#: build/rafflepress/app/gblock.php:132, build/rafflepress/resources/views/rafflepress-giveaway.php:820
 msgid "Live Preview"
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 msgid "You do not have sufficient permissions to create giveaways."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:60, build/rafflepress/app/routes.php:398
+#: build/rafflepress/app/giveaway.php:60, build/rafflepress/app/routes.php:398, build/rafflepress/resources/views/rafflepress-giveaway.php:36
 msgid "Insufficient Permissions"
 msgstr ""
 
@@ -304,7 +304,7 @@ msgstr ""
 msgid "Draft - "
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:292, build/rafflepress/app/giveaway.php:1147, build/rafflepress/resources/emails/notification.php:129, build/rafflepress/resources/emails/notification.php:171, build/rafflepress/resources/views/backend-translations.php:106
+#: build/rafflepress/app/giveaway.php:292, build/rafflepress/app/giveaway.php:1189, build/rafflepress/resources/emails/notification.php:129, build/rafflepress/resources/emails/notification.php:171, build/rafflepress/resources/views/backend-translations.php:106
 msgid "Ended"
 msgstr ""
 
@@ -352,11 +352,19 @@ msgstr ""
 msgid "Sorry this url already exists. Please choose a new one."
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:1065, build/rafflepress/app/giveaway.php:1081
+#: build/rafflepress/app/giveaway.php:966
+msgid "The giveaway settings could not be read. Please reload the page and save again."
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:987
+msgid "The giveaway settings were incomplete, so nothing was saved. Please reload the page and try again."
+msgstr ""
+
+#: build/rafflepress/app/giveaway.php:1107, build/rafflepress/app/giveaway.php:1123
 msgid "Sorry the Page Permalink you assigned already exists. Please Choose a New Page Permalink under Settings > General"
 msgstr ""
 
-#: build/rafflepress/app/giveaway.php:1145
+#: build/rafflepress/app/giveaway.php:1187
 msgid "Starts in"
 msgstr ""
 
@@ -384,7 +392,7 @@ msgstr ""
 msgid "Invalid action token. Please refresh the page and try again."
 msgstr ""
 
-#: build/rafflepress/app/rafflepress.php:501, build/rafflepress/app/rafflepress.php:192, build/rafflepress/resources/views/rafflepress-giveaway.php:229
+#: build/rafflepress/app/rafflepress.php:501, build/rafflepress/app/rafflepress.php:192, build/rafflepress/resources/views/rafflepress-giveaway.php:237
 msgid "This giveaway is not currently running."
 msgstr ""
 
@@ -420,7 +428,7 @@ msgstr ""
 msgid "You have reached the maximum number of sign ups."
 msgstr ""
 
-#: build/rafflepress/app/rafflepress.php:86, build/rafflepress/resources/views/rafflepress-giveaway.php:108
+#: build/rafflepress/app/rafflepress.php:86, build/rafflepress/resources/views/rafflepress-giveaway.php:116
 msgid "Your email has been confirmed."
 msgstr ""
 
@@ -3058,14 +3066,62 @@ msgstr ""
 msgid "Please Enter Your WhatsApp Phone number."
 msgstr ""
 
-#: build/rafflepress/resources/views/rafflepress-giveaway.php:74
+#: build/rafflepress/resources/views/frontend-translations.php:156
+msgid "Share on X ( Twitter )"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:157
+msgid "Share on Pinterest"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:159
+msgid "Share by email"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:160
+msgid "Copy referral link"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:161
+msgid "Previous prize"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:162
+msgid "Next prize"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:163
+msgid "Your answer"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:164
+msgid "Choose an image to upload"
+msgstr ""
+
+#: build/rafflepress/resources/views/frontend-translations.php:165
+msgid "Copied!"
+msgstr ""
+
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:26
+msgid "You must be logged in to view this page."
+msgstr ""
+
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:27
+msgid "Authentication Required"
+msgstr ""
+
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:35
+msgid "You must be logged in as an admin to view this page."
+msgstr ""
+
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:82
 msgid "No Giveaway Found"
 msgstr ""
 
-#: build/rafflepress/resources/views/rafflepress-giveaway.php:234
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:242
 msgid "This giveaway has ended."
 msgstr ""
 
-#: build/rafflepress/resources/views/rafflepress-giveaway.php:805
+#: build/rafflepress/resources/views/rafflepress-giveaway.php:823
 msgid "Preview All Actions"
 msgstr ""

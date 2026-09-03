@@ -33,7 +33,10 @@ function rafflepress_lite_get_ip($only_allow_remote_addr = false) {
  *  Get IP
  */
 function rafflepress_lite_convert_string_to_boolean( &$value, $key ) {
-	if ( $value == 'false' || $value == 'true' ) {
+	// Compare strictly. Settings now arrive as decoded JSON, so a value can be a real
+	// int. On PHP below 8 a loose == cast the string operand to a number, which made
+	// 0 == 'false' true and overwrote a legitimate 0 with boolean false.
+	if ( 'false' === $value || 'true' === $value ) {
 		$value = filter_var( $value, FILTER_VALIDATE_BOOLEAN );
 	}
 }
