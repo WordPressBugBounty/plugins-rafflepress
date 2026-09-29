@@ -132,15 +132,15 @@ if ( ! empty( $_GET['confirm'] ) && ! empty( $_GET['id'] ) ) {
 	}
 
 	nocache_headers();
-	$url = $giveaway->parent_url;
-	$url = esc_url($url);
+	// A stored parent_url on another host is dropped, including one saved before the host check below.
+	$url = wp_validate_redirect( esc_url_raw( $giveaway->parent_url ), '' );
 	if ( ! empty( $giveaway->slug ) ) {
 		$url = home_url() . '/' . $giveaway->slug;
 	}
 	if ( empty( $url ) ) {
 		$url = home_url() . '?rafflepress_page=rafflepress_render&rafflepress_id=' . $giveaway->id;
 	}
-	header( "Location: $url" );
+	wp_safe_redirect( $url );
 	exit;
 }
 
@@ -197,11 +197,11 @@ if ( ! empty( $settings->show_winners ) ) {
 if ( ! empty( $_GET['iframe'] ) && ! empty( $_GET['parent_url'] ) ) {
 	$tablename  = $wpdb->prefix . 'rafflepress_giveaways';
 	$parent_url = urldecode( $_GET['parent_url'] );
-	$parent_url = esc_url( $parent_url );
+	// Accept only a URL on this site's own host.
+	// esc_url_raw, not esc_url: display escaping stores &#038; and breaks multi-param URLs.
+	$parent_url = wp_validate_redirect( esc_url_raw( $parent_url ), '' );
 	if ( $giveaway->parent_url != $parent_url ) {
-		// ensure domain is correct
-		$home_url = home_url();
-		if ( strpos( $parent_url, $home_url ) !== false ) {
+		if ( ! empty( $parent_url ) ) {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Direct query on a custom RafflePress table (no core API); real-time data or write op, so object caching is not applied.
 		$wpdb->update(
 			$tablename,
@@ -416,8 +416,8 @@ if ( ! empty( $_GET['rpr'] ) && $is_bot === false ) {
 	$ref_id = absint( $_GET['rpr'] );
 	nocache_headers();
 	setcookie( 'rafflepress_ref_' . $rafflepress_id, $ref_id, strtotime( '+1 year' ), '/' );
-	$url = esc_url($giveaway->parent_url);
-	
+	$url = wp_validate_redirect( esc_url_raw( $giveaway->parent_url ), '' );
+
 	if ( ! empty( $giveaway->slug ) ) {
 		$url = home_url() . '/' . $giveaway->slug;
 	}
@@ -897,6 +897,35 @@ if ( $is_preview ) {
 		$fb_auth_integration_url = '';
 		?>
 
+		<?php
+		// Send only what the giveaway script reads. The stored row and settings also
+		// hold server-only values: the reCAPTCHA secret, webhook URLs, sender emails.
+		$public_settings = array_intersect_key(
+			(array) $settings,
+			array_flip(
+				array(
+					'affiliate_id',
+					'enable_confirmation_email',
+					'enable_recaptcha',
+					'enable_redirect_url',
+					'entry_options',
+					'facebook_app_id',
+					'gdpr_consent',
+					'gdpr_consent_text',
+					'hide_total_entries',
+					'layout',
+					'prizes',
+					'recaptcha_site_key',
+					'redirect_url',
+					'rules',
+					'show_powered_by_link',
+					'social_login_facebook',
+				)
+			)
+		);
+		// The script only checks that a secret is set. The value stays on the server.
+		$public_settings['recaptcha_secret_key'] = ! empty( $settings->recaptcha_secret_key );
+		?>
 		var rafflepress_data =
 			<?php
 			echo wp_json_encode( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode() safely encodes all values as JSON for a JS variable assignment.
@@ -913,8 +942,12 @@ if ( $is_preview ) {
 					'msg'                     => $msg,
 					'is_preview'              => $is_preview,
 					'preview_mode'            => $preview_mode,
-					'giveaway'                => $giveaway,
-					'settings'                => $settings,
+					'giveaway'                => array(
+						'id'      => $giveaway->id,
+						'name'    => $giveaway->name,
+						'entries' => $giveaway->entries,
+					),
+					'settings'                => $public_settings,
 					'winners'                 => $winners,
 					'parent_url'              => esc_url( $parent_url ),
 					'referral_url'            => $ref_url,
